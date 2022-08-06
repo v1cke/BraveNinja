@@ -11,6 +11,7 @@ class Endboss extends MovableObject {
     energy = 100;
     characterAttackable = false;
     lastHit;
+    deadTimer = 8;
 
 
 
@@ -118,10 +119,12 @@ class Endboss extends MovableObject {
                 }, 3000);
             } else if (this.objectHurt) {
                 this.playAnimation(this.IMAGES_HURT);
-            } else if (this.isDead()) {
+            } else if (this.isDead() && this.deadTimer > 0) {
                 this.playAnimation(this.IMAGES_DYING);
-                this.gotKilled();
                 this.EndbossDying.play();
+                this.deadTimer--;
+            } else if (this.isDead() && this.deadTimer == 0) {
+                this.gotKilled();
             } else {
                 if (this.world.character.x < 1600) {
                     this.speed = 0;
