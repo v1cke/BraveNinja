@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/x-icon" href="img/favicon.png">
+    <link rel="stylesheet" href="style.css">
+    <script src="models/drawable-object.class.js"></script>
+    <script src="models/movable-object.class.js"></script>
+    <script src="models/throwable-object.class.js"></script>
+    <script src="models/status-bars.class.js"></script>
+    <script src="models/bosshealth-bar.class.js"></script>
+    <script src="models/dagger-bar.class.js"></script>
+    <script src="models/character.class.js"></script>
+    <script src="models/minotaur.class.js"></script>
+    <script src="models/endboss.class.js"></script>
+    <script src="models/world.class.js"></script>
+    <script src="models/background-objects.class.js"></script>
+    <script src="models/clouds.class.js"></script>
+    <script src="models/daggers.class.js"></script>
+    <script src="models/level.class.js"></script>
+    <script src="levels/level1.js"></script>
+    <script src="models/keyboard.class.js"></script>
+    <script src="js/game.js"></script>
+    <title>El Ninja Loco</title>
+</head>
+
+<body>
+
+    <h1>HENRY THE BRAVE NINJA</h1>
+
+    <div id="startScreen" onclick="hideStartScreen()">
+        <img src="img/start_screen.png" class="startImg">
+    </div>
+
+    <canvas id="canvas" height="480px" width="780px">
+
+    </canvas>
+    <div class="panelContainer">
+        <div class="btnContainer">
+            <button id="btnLeft"><img src="img/icon/arrow-left.png"></button>
+            <button id="btnRight"><img src="img/icon/arrow-right.png"></button>
+        </div>
+        <div class="btnContainer">
+            <button id="btnUp"><img src="img/icon/arrow-up.png"></button>
+            <button id="btnThrow"><img src="img/icon/arrow-throw.png"></button>
+        </div>
+
+    </div>
+</body>
+
+</html>
