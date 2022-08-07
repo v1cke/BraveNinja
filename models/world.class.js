@@ -8,6 +8,7 @@ class World {
     camera_x = 0;
     statusBar = new Statusbar();
     bossHealthBar = new BossHealthBar();
+    treasureChest = new Treasure(this);
     daggerBar = new Daggerbar();
     throwableDagger = [];
 
@@ -49,6 +50,7 @@ class World {
     run() {
         setInterval(() => {
             this.checkThrowObjects();
+            this.spliceEnemiesEndboss();
         }, 100);
     }
 
@@ -65,6 +67,22 @@ class World {
     }
 
 
+    spliceEnemiesEndboss(){
+        this.level.endboss.forEach((endboss) => {
+            let i = this.level.endboss.indexOf(endboss);
+            if (this.level.endboss[i].y > 700) {
+                this.level.endboss.splice(i, 1)
+            }
+        })
+        this.level.enemies.forEach((enemy) => {
+            let y = this.level.enemies.indexOf(enemy);
+            if (this.level.enemies[y].y > 600) {
+                this.level.enemies.splice(y, 1)
+            }
+        })
+    }
+
+
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.ctx.translate(this.camera_x, 0);
@@ -73,6 +91,7 @@ class World {
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.level.endboss);
         this.addObjectsToMap(this.level.daggers);
+        this.addToMap(this.treasureChest);
         this.ctx.translate(-this.camera_x, 0); //move camera back for statusbar not move with background
         this.addToMap(this.statusBar);
         this.addToMap(this.bossHealthBar);

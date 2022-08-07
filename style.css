@@ -81,9 +81,9 @@ canvas {
 }
 
 /* smartphone */
-@media only screen and (max-height: 580px) {
+@media only screen and (max-height: 480px) {
     canvas {
-        height : 80vh;
+        height : 90vh;
     }
     .panelContainer {
         display: flex;

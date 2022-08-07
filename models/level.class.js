@@ -3,7 +3,7 @@ class Level {
     clouds;
     enemies;
     endboss;
-    level_end_x = 2400;
+    level_end_x = 2900;
     daggers;
 
     constructor(backgroundObjects, clouds, enemies, endboss, daggers) {

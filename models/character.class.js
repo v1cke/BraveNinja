@@ -3,7 +3,7 @@ class Character extends MovableObject {
     height = 120
     y = 0;
     world;
-    speed = 10;
+    speed = 8;
     movable = true;
     characterMovement;
     ninja_running = new Audio('audio/ninja_running.mp3');
@@ -127,7 +127,7 @@ class Character extends MovableObject {
                 this.playAnimation(this.IMAGES_WALKING);
             }
             if (this.world.keyboard.UP && !this.isAboveGround() && !this.isHurt() && !this.isDead()) {
-                // this.ninja_jump.play();
+                this.ninja_jump.play();
                 this.jump();
             }
         }
@@ -200,8 +200,6 @@ class Character extends MovableObject {
     }
 
     checkMovable() {
-        this.world.level.endboss.forEach((endboss) => {
-            let i = world.level.endboss.indexOf(endboss);
             if (
                 !this.isDead() &&
                 !this.isHurt()) {
@@ -209,17 +207,6 @@ class Character extends MovableObject {
             } else {
                 this.movable = false;
             }
-            if (this.world.level.endboss[i].y > 700) {
-                this.world.level.endboss.splice(i, 1)
-            }
-        })
-        this.world.level.enemies.forEach((enemy) => {
-            let y = world.level.enemies.indexOf(enemy);
-            if (this.world.level.enemies[y].y > 600) {
-                this.world.level.enemies.splice(y, 1)
-            }
-        })
     }
-
 
 }
