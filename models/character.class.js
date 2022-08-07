@@ -3,13 +3,13 @@ class Character extends MovableObject {
     height = 120
     y = 0;
     world;
-    speed = 8;
-    movable = true;
+    speed = 9;
     characterMovement;
     ninja_running = new Audio('audio/ninja_running.mp3');
     ninja_jump = new Audio('audio/ninja_jump.mp3');
     ninja_hurt = new Audio('audio/ninja_hurt.mp3');
     ninja_die = new Audio('audio/ninja_die.mp3');
+    looseGame = new Audio('audio/youLose.mp3');
 
 
     IMAGES_IDLE = [
@@ -72,7 +72,6 @@ class Character extends MovableObject {
         this.loadImages(this.IMAGES_WALKING);
         this.loadImages(this.IMAGES_JUMP);
         this.loadImages(this.IMAGES_DEAD);
-        this.checkCollisions();
         this.applyGravity();
         this.animate();
     }
@@ -85,14 +84,17 @@ class Character extends MovableObject {
      */
     animate() {
         setInterval(() => {
-            this.checkMovable();
             this.ninja_running.pause();
             this.checkRunRight();
             this.checkRunLeft();
-            this.world.camera_x = - this.x + 200;
+            this.world.camera_x = - this.x + 250;
+            if (this.y > 345) {
+                this.y = 345
+            }
         }, 20);
 
         this.characterMovement = setInterval(() => {
+            this.checkCollisions();
             if (!this.isDead()) {
                 this.playingCharacter();
             } else if (this.isDead()) {
@@ -107,6 +109,9 @@ class Character extends MovableObject {
         this.ninja_die.play();
         this.loadImage('img/ninja/Dead__009.png');
         clearInterval(this.characterMovement);
+        setTimeout(() => {
+            this.looseGame.play();
+        }, 5000);
     }
 
 
@@ -115,10 +120,7 @@ class Character extends MovableObject {
             this.playAnimation(this.IMAGES_DEAD);
             this.ninja_hurt.play();
         } else if (!this.world.keyboard.RIGHT || !this.world.keyboard.LEFT) {
-            let i = this.currentImage % this.IMAGES_IDLE.length;  // bewirkt CurrentImage nach einem IMAGES_IDLE Array Durchlauf nochmal von vorne durchläuft, also immer 0-9 bleibt
-            let path = this.IMAGES_IDLE[i];
-            this.img = this.imageCache[path];
-            this.currentImage++;
+            this.playAnimation(this.IMAGES_IDLE);
         }
         if (this.isAboveGround()) {
             this.playAnimation(this.IMAGES_JUMP);
@@ -137,7 +139,7 @@ class Character extends MovableObject {
     checkRunRight() {
         if (this.world.keyboard.RIGHT &&
             this.x < level1.level_end_x &&
-            this.movable) {
+            !this.isDead()) {
             this.moveRight();
             this.ninja_running.play();
         }
@@ -145,19 +147,17 @@ class Character extends MovableObject {
 
     checkRunLeft() {
         if (this.world.keyboard.LEFT &&
-            this.x > -550 &&
-            this.movable) {
+            this.x > -500 &&
+            !this.isDead()) {
             this.moveLeft();
             this.ninja_running.play();
         }
     }
 
     checkCollisions() {
-        setInterval(() => {
-            this.checkCollisionEnemies();
-            this.checkCollisionEndboss();
-            this.checkPickDaggers();
-        }, 100);
+        this.checkCollisionEnemies();
+        this.checkCollisionEndboss();
+        this.checkPickDaggers();
     }
 
 
@@ -197,16 +197,6 @@ class Character extends MovableObject {
                 }
             }
         })
-    }
-
-    checkMovable() {
-            if (
-                !this.isDead() &&
-                !this.isHurt()) {
-                this.movable = true;
-            } else {
-                this.movable = false;
-            }
     }
 
 }

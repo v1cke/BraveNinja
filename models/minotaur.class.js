@@ -72,12 +72,12 @@ class Minotaur extends MovableObject {
         this.loadImages(this.IMAGES_ATTACK);
         this.world = world;
         this.speed = 1 + Math.random() * 0.4;
-        this.checkPositionCharacter();
         this.animate();
     }
-
+    
     animate() {
         this.enemyLife = setInterval(() => {
+            this.checkPositionCharacter();
             if (!this.enemyDead && !this.attack && this.x >= this.world.character.x) {
                 this.moveLeft();
                 this.playAnimation(this.IMAGES_WALKING);
@@ -103,12 +103,10 @@ class Minotaur extends MovableObject {
 
 
     checkPositionCharacter() {
-        setInterval(() => {
             this.checkIfCharacterAttackable();
             if (!this.enemyDead && this.characterAttackable) {
                 this.attack = true;
             } else { this.attack = false }
-        }, 100);
     }
 
     checkIfCharacterAttackable() {
@@ -133,7 +131,6 @@ class Minotaur extends MovableObject {
 
 
     gotKilled() {
-        // loadImage('img/minotaur/Minotaur_01/Dying/Minotaur_01_Dying_014.png')
         this.enemyLife = this.loadImage('img/minotaur/Minotaur_01/Dying/Minotaur_01_Dying_014.png');
         setTimeout(() => {
             this.speed = 0.03;

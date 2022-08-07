@@ -44,6 +44,22 @@ class ThrowableObject extends MovableObject {
             this.y < mo.y + mo.height
     }
 
+    DaggerCollidingBody(mo) {
+        return this.x + this.width > mo.x &&
+            this.x + this.width < mo.x + mo.width &&
+            this.y + this.height > mo.y + 250 &&
+            this.x >= mo.x + (mo.width / 5) &&
+            this.y < mo.y + mo.height
+    }
+
+    DaggerCollidingHead(mo) {
+        return this.x + this.width > mo.x &&
+            this.x + this.width < mo.x + mo.width &&
+            this.y + this.height > mo.y + 120 &&
+            this.x >= mo.x + (mo.width / 5) &&
+            this.y < mo.y + mo.height
+    }
+
 
     checkDaggerCollision() {
         this.applyGravity();
@@ -68,15 +84,19 @@ class ThrowableObject extends MovableObject {
             }
         })
         this.world.level.endboss.forEach((endboss) => {
-            if (this.DaggerColliding(endboss)) {
+            if (this.DaggerCollidingBody(endboss)) {
                 this.speed = 0;
                 this.loadImage('img/daggers/PNG/dagger9.png');
-                endboss.hitByDagger();
+                endboss.hitByDaggerBody();
+            } else if (this.DaggerCollidingHead(endboss)) {
+                this.speed = 0;
+                this.loadImage('img/daggers/PNG/dagger9.png');
+                endboss.hitByDaggerHead();
             }
         })
     }
 
-    
+
     throwDaggerLeft() {
         this.moveLeft();
         this.world.level.enemies.forEach((enemy) => {
@@ -87,10 +107,14 @@ class ThrowableObject extends MovableObject {
             }
         })
         this.world.level.endboss.forEach((endboss) => {
-            if (this.DaggerColliding(endboss)) {
+            if (this.DaggerCollidingBody(endboss)) {
                 this.speed = 0;
                 this.loadImage('img/daggers/PNG/dagger9.png');
-                endboss.hitByDagger();
+                endboss.hitByDaggerBody();
+            } else if (this.DaggerCollidingHead(endboss)) {
+                this.speed = 0;
+                this.loadImage('img/daggers/PNG/dagger9.png');
+                endboss.hitByDaggerHead();
             }
         })
     }

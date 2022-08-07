@@ -31,7 +31,7 @@ class MovableObject extends DrawableObject {
             return this.y < 800;
         }
         if (this instanceof Character) {
-            return this.y < 340;
+            return this.y < 345;
         }
     }
 
@@ -74,10 +74,8 @@ class MovableObject extends DrawableObject {
         if (!this.isHurt()) {
             if (opponent instanceof Minotaur) {
                 this.energy -= 5;
-                console.log(this.energy);
             } else if (opponent instanceof Endboss) {
                 this.energy -= 10;
-                console.log(this.energy);
             }
             if (this.energy < 0) {
                 this.energy = 0;
@@ -87,14 +85,31 @@ class MovableObject extends DrawableObject {
         }
     }
 
-    hitByDagger() {
+    hitByDaggerBody() {
         if (!this.objectHurt) {
             this.objectHurt = true;
-            this.energy -= 20;
+            this.energy -= 10;
             if (this.energy < 0) {
                 this.energy = 0;
             }
-            console.log('Endboss Energy is', this.energy)
+            this.world.bossHealthBar.setPercentage(this.energy);
+            if (this.isDead()) {
+                this.objectHurt = false;
+            } else {
+                setTimeout(() => {
+                    this.objectHurt = false;
+                }, 2000);
+            }
+        }
+    }
+
+    hitByDaggerHead() {
+        if (!this.objectHurt) {
+            this.objectHurt = true;
+            this.energy -= 30;
+            if (this.energy < 0) {
+                this.energy = 0;
+            }
             this.world.bossHealthBar.setPercentage(this.energy);
             if (this.isDead()) {
                 this.objectHurt = false;
@@ -114,7 +129,7 @@ class MovableObject extends DrawableObject {
     isHurt() {
         let timepassed = new Date().getTime() - this.lastHit; // difference in ms
         timepassed = timepassed / 1000; // difference in sec
-        return timepassed < 0.5;
+        return timepassed < 1;
     }
 
 
