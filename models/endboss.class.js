@@ -1,15 +1,15 @@
 class Endboss extends MovableObject {
     x = 2500;
     y = 65;
-    speed = 4;
+    speed = 6;
     currentImage = 0;
     width = 300;
     height = 400;
     EndbossScream = new Audio('audio/enemy_scream.mp3');
     EndbossDying = new Audio('audio/endboss_die.mp3');
     world;
+    endbossMove = false;
     energy = 100;
-    characterAttackable = false;
     lastHit;
     deadTimer = 8;
 
@@ -96,28 +96,10 @@ class Endboss extends MovableObject {
 
     animate() {
         this.animationTimer = setInterval(() => {
-            if (!this.isDead() && !this.objectHurt && !this.characterAttackable && (this.x + this.width) > this.world.character.x) {
-                this.moveLeft();
-                this.playAnimation(this.IMAGES_WALKING);
-            } else if (!this.isDead() && !this.objectHurt && this.characterAttackable && (this.x + this.width) > this.world.character.x) {
-                this.speed = 7;
-                this.moveLeft();
-                this.playAnimation(this.IMAGES_ATTACKING);
-                setTimeout(() => {
-                    this.EndbossScream.play();
-                }, 3000);
-            } else if (!this.isDead() && !this.objectHurt && !this.characterAttackable && this.x < this.world.character.x) {
-                !this.otherDirection;
-                this.moveRight();
-                this.playAnimation(this.IMAGES_IDLE)
-            } else if (!this.isDead() && !this.objectHurt && this.characterAttackable && this.x < this.world.character.x) {
-                this.speed = 7;
-                this.moveRight();
-                this.playAnimation(this.IMAGES_ATTACKING);
-                setTimeout(() => {
-                    this.EndbossScream.play();
-                }, 3000);
-            } else if (this.objectHurt) {
+            if (this.x - this.world.character.x < 500) {
+                this.endbossMove = true;
+            }
+            if (this.objectHurt) {
                 this.playAnimation(this.IMAGES_HURT);
             } else if (this.isDead() && this.deadTimer > 0) {
                 this.playAnimation(this.IMAGES_DYING);
@@ -125,38 +107,64 @@ class Endboss extends MovableObject {
                 this.deadTimer--;
             } else if (this.isDead() && this.deadTimer == 0) {
                 this.gotKilled();
-            } else {
-                if (this.world.character.x < 1600) {
-                    this.speed = 0;
-                    this.playAnimation(this.IMAGES_IDLE)
-                } else {
-                    this.speed = 3;
-                }
+            } else if (this.characterLeft(this)) {
+                this.endbossMoving(this.moveLeft());
+            } else if (this.characterRight(this)) {
+                this.endbossMoving(this.moveRight());
             }
         }, 100);
     }
 
 
-    checkIfCharacterAttackable() {
-        setInterval(() => {
-            if (this.x - this.world.character.x < 200 && !this.world.character.isDead()) {
-                this.characterAttackable = true;
-            } else if (this.world.character.isDead()) {
-                clearInterval(this.animationTimer);
-            } else {
-                this.characterAttackable = false;
+    endbossMoving(move) {
+        if (!this.isDead() && !this.objectHurt && this.endbossMove) {
+            if (!this.checkIfCharacterAttackable()) {
+                move;
+                this.playAnimation(this.IMAGES_WALKING);
+            } else if (this.checkIfCharacterAttackable()) {
+                this.playAnimation(this.IMAGES_ATTACKING);
+                this.EndbossScream.play();
+                setTimeout(() => {
+                    this.EndbossScream.pause();
+                }, 1500);
             }
-        }, 50);
+        }
+    }
+
+
+    // characterLeft() {
+    //     return this.world.character.x + (this.world.character.width / 2) < (this.x + this.width / 2)
+    // }
+
+    // characterRight() {
+    //     return this.world.character.x + (this.world.character.width / 2) > (this.x + this.width / 2)
+    // }
+
+
+    checkIfCharacterAttackable() {
+        if (this.characterLeft(this)) {
+            if (this.world.character.x + this.world.character.width - 10 >= this.x) {
+                return true;
+            } else {
+                return false;
+            }
+        } else if (this.characterRight(this)) {
+            if (this.world.character.x + 10 <= this.x + this.width) {
+                return true;
+            } else {
+                return false;
+            }
+        }
     }
 
 
     gotKilled() {
         this.loadImage('img/troll/Troll_01_1_DIE_009.png');
         setTimeout(() => {
-            this.speed = 0.01;
+            this.speed = 0.1;
             this.acceleration = 0.01;
             this.applyGravity();
-        }, 3000);
+        }, 2500);
         clearInterval(this.animationTimer);
     }
 

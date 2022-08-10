@@ -31,14 +31,14 @@ class World {
 
 
     addMinotaur(){
-        this.level.enemies.push(
-            new Minotaur(this), 
-            new Minotaur(this), 
-            new Minotaur(this),
-            new Minotaur(this),
-            new Minotaur(this),
-            new Minotaur(this)
-            )
+        // this.level.enemies.push(
+        //     new Minotaur(this), 
+        //     new Minotaur(this), 
+        //     new Minotaur(this),
+        //     new Minotaur(this),
+        //     new Minotaur(this),
+        //     new Minotaur(this)
+        //     )
     }
     
     addEndboss(){
@@ -77,7 +77,7 @@ class World {
         this.level.enemies.forEach((enemy) => {
             let y = this.level.enemies.indexOf(enemy);
             if (this.level.enemies[y].y > 600) {
-                this.level.enemies.splice(y, 6)
+                this.level.enemies.splice(y, 1)
             }
         })
     }
@@ -119,7 +119,7 @@ class World {
             this.flipImage(mo);
         }
         mo.draw(this.ctx);
-        mo.drawFrame(this.ctx);
+        // mo.drawFrame(this.ctx);
         if (mo.otherDirection) {
             this.flipImageBack(mo);
         }

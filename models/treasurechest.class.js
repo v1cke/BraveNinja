@@ -39,7 +39,11 @@ class Treasure extends MovableObject {
             this.loadImage('img/treasurebox/box_opened2.png')
             this.wonGame.play();
         }, 1500);
-        clearInterval(this.getTreasure)
+        clearInterval(this.getTreasure);
+        setTimeout(() => {
+            document.getElementById('wonGameScreen').style.display = "flex";
+            document.getElementById('canvas').style.display = "none";
+        }, 2000);
     }
 
 }

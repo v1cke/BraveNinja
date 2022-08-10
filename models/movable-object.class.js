@@ -57,6 +57,31 @@ class MovableObject extends DrawableObject {
         this.currentImage++;
     }
 
+    characterLeft(enemy) {
+        return this.world.character.x + (this.world.character.width / 2) < (enemy.x + enemy.width / 2)
+    }
+
+    characterRight(enemy) {
+        return this.world.character.x + (this.world.character.width / 2) > (enemy.x + enemy.width / 2)
+    }
+
+
+    // checkIfCharacterAttackable(enemy) {
+    //     if (this.characterLeft(enemy)) {
+    //         if (this.world.character.x + this.world.character.width - 10 >= enemy.x) {
+    //             return true;
+    //         } else {
+    //             return false;
+    //         }
+    //     } else if (this.characterRight(enemy)) {
+    //         if (this.world.character.x + 10 <= enemy.x + enemy.width) {
+    //             return true;
+    //         } else {
+    //             return false;
+    //         }
+    //     }
+    // }
+
     isColliding(mo) {
         return this.x + this.width > mo.x &&
             this.y + this.height > mo.y &&
