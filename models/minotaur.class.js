@@ -2,10 +2,7 @@ class Minotaur extends MovableObject {
 
     world;
     enemy_dying = new Audio('audio/enemy_dying.mp3');
-    enemyDead = false;
     deadTimer = 13;
-    attack = false;
-    characterAttackable = false;
     otherDirection = false;
     enemyLife;
 
@@ -29,6 +26,21 @@ class Minotaur extends MovableObject {
         'img/minotaur/Minotaur_01/Walking/Minotaur_01_Walking_015.png',
         'img/minotaur/Minotaur_01/Walking/Minotaur_01_Walking_016.png',
         'img/minotaur/Minotaur_01/Walking/Minotaur_01_Walking_017.png',
+    ];
+
+    IMAGES_IDLE = [
+        'img/minotaur/Minotaur_01/Idle Blink/Minotaur_01_Idle Blinking_000.png',
+        'img/minotaur/Minotaur_01/Idle Blink/Minotaur_01_Idle Blinking_001.png',
+        'img/minotaur/Minotaur_01/Idle Blink/Minotaur_01_Idle Blinking_002.png',
+        'img/minotaur/Minotaur_01/Idle Blink/Minotaur_01_Idle Blinking_003.png',
+        'img/minotaur/Minotaur_01/Idle Blink/Minotaur_01_Idle Blinking_004.png',
+        'img/minotaur/Minotaur_01/Idle Blink/Minotaur_01_Idle Blinking_005.png',
+        'img/minotaur/Minotaur_01/Idle Blink/Minotaur_01_Idle Blinking_006.png',
+        'img/minotaur/Minotaur_01/Idle Blink/Minotaur_01_Idle Blinking_007.png',
+        'img/minotaur/Minotaur_01/Idle Blink/Minotaur_01_Idle Blinking_008.png',
+        'img/minotaur/Minotaur_01/Idle Blink/Minotaur_01_Idle Blinking_009.png',
+        'img/minotaur/Minotaur_01/Idle Blink/Minotaur_01_Idle Blinking_010.png',
+        'img/minotaur/Minotaur_01/Idle Blink/Minotaur_01_Idle Blinking_011.png',
     ];
 
     IMAGES_DYING = [
@@ -66,67 +78,67 @@ class Minotaur extends MovableObject {
 
     constructor(world) {
         super().loadImage('img/minotaur/Minotaur_01/Idle/Minotaur_01_Idle_000.png');
-        this.x = 350 + Math.random() * 2000;  // math.random immer zwischen 0 und 1 (ohne 1), also in diesem Fall alles zwischen 0 und ca. 499
+        this.x = 350 + Math.random() * 2500;  // math.random immer zwischen 0 und 1 (ohne 1), also in diesem Fall alles zwischen 0 und ca. 499
         this.loadImages(this.IMAGES_WALKING);
         this.loadImages(this.IMAGES_DYING);
         this.loadImages(this.IMAGES_ATTACK);
+        this.loadImages(this.IMAGES_IDLE);
         this.world = world;
         this.speed = 1 + Math.random() * 0.4;
         this.animate();
     }
     
+
     animate() {
         this.enemyLife = setInterval(() => {
-            this.checkPositionCharacter();
-            if (!this.enemyDead && !this.attack && this.x >= this.world.character.x) {
-                this.moveLeft();
-                this.playAnimation(this.IMAGES_WALKING);
-            } else if (!this.enemyDead && this.attack && this.x >= this.world.character.x) {
-                this.moveLeft();
-                this.playAnimation(this.IMAGES_ATTACK);
-            } else if (!this.enemyDead && !this.attack && this.x <= this.world.character.x) {
-                this.moveRight();
-                this.playAnimation(this.IMAGES_WALKING)
-            } else if (!this.enemyDead && this.attack && this.x <= this.world.character.x) {
-                this.moveRight();
-                this.playAnimation(this.IMAGES_ATTACK)
-            } else if (this.enemyDead && this.deadTimer > 0) {
+            if (this.world.character.isDead()) {
+                this.playAnimation(this.IMAGES_IDLE);
+            }
+            if (!this.world.character.isDead()) {
+            if (this.isDead() && this.deadTimer > 0) {
                 this.playAnimation(this.IMAGES_DYING);
                 this.enemy_dying.play();
                 this.deadTimer--;
-            } else if (this.enemyDead && this.deadTimer == 0) {
+            } else if (this.isDead() && this.deadTimer == 0) {
                 this.enemy_dying.pause();
                 this.gotKilled();
+            } else if (this.characterLeft(this)) {
+                this.enemieMoving(this.moveLeft());
+            } else if (this.characterRight(this)) {
+                this.enemieMoving(this.moveRight());
             }
+        }
         }, 50);
     }
 
 
-    checkPositionCharacter() {
-            this.checkIfCharacterAttackable();
-            if (!this.enemyDead && this.characterAttackable) {
-                this.attack = true;
-            } else { this.attack = false }
-    }
-
-    checkIfCharacterAttackable() {
-        if (this.x - this.world.character.x < 150 &&
-            this.x > this.world.character.x &&
-            !this.world.character.isDead()) {
-            this.characterAttackable = true;
-        } else if (this.world.character.x - this.x < 150 &&
-            this.world.character.x > this.x &&
-            !this.world.character.isDead()) {
-            this.characterAttackable = true;
-        } else if (this.world.character.isDead()) {
-            clearInterval(this.enemyLife);
-        } else {
-            this.characterAttackable = false;
+    enemieMoving(move) {
+        if (!this.isDead()) {
+            if (!this.checkIfCharacterAttackable()) {
+                this.speed = 1 + Math.random() * 0.4;
+                move;
+                this.playAnimation(this.IMAGES_WALKING);
+            } else if (this.checkIfCharacterAttackable()) {
+                this.speed = 0;
+                this.playAnimation(this.IMAGES_ATTACK);
+            }
         }
     }
 
-    dyingEnemy() {
-        this.enemyDead = true;
+    checkIfCharacterAttackable() {
+        if (this.characterLeft(this)) {
+            if (this.world.character.x + this.world.character.width - 10 >= this.x) {
+                return true;
+            } else {
+                return false;
+            }
+        } else if (this.characterRight(this)) {
+            if (this.world.character.x + 10 <= this.x + this.width) {
+                return true;
+            } else {
+                return false;
+            }
+        }
     }
 
 

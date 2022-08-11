@@ -190,9 +190,9 @@ class Character extends MovableObject {
     checkCollisionEnemies() {
         this.world.level.enemies.forEach((enemy) => {
             let i = world.level.enemies.indexOf(enemy);
-            if (this.isColliding(enemy) && !enemy.enemyDead) {
+            if (this.isColliding(enemy) && !enemy.isDead()) {
                 if (this.jumpsOnTop(enemy) && this.speedY < 0 && this.isAboveGround()) {
-                    enemy.dyingEnemy();
+                    enemy.energy = 0;
                 } else {
                     this.hit(enemy);
                     this.world.statusBar.setPercentage(this.energy);

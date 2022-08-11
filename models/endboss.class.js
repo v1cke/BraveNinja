@@ -1,5 +1,5 @@
 class Endboss extends MovableObject {
-    x = 2500;
+    x = 2700;
     y = 65;
     speed = 6;
     currentImage = 0;
@@ -9,7 +9,6 @@ class Endboss extends MovableObject {
     EndbossDying = new Audio('audio/endboss_die.mp3');
     world;
     endbossMove = false;
-    energy = 100;
     lastHit;
     deadTimer = 8;
 
@@ -96,21 +95,26 @@ class Endboss extends MovableObject {
 
     animate() {
         this.animationTimer = setInterval(() => {
-            if (this.x - this.world.character.x < 500) {
-                this.endbossMove = true;
+            if (this.world.character.isDead()) {
+                this.playAnimation(this.IMAGES_IDLE);
             }
-            if (this.objectHurt) {
-                this.playAnimation(this.IMAGES_HURT);
-            } else if (this.isDead() && this.deadTimer > 0) {
-                this.playAnimation(this.IMAGES_DYING);
-                this.EndbossDying.play();
-                this.deadTimer--;
-            } else if (this.isDead() && this.deadTimer == 0) {
-                this.gotKilled();
-            } else if (this.characterLeft(this)) {
-                this.endbossMoving(this.moveLeft());
-            } else if (this.characterRight(this)) {
-                this.endbossMoving(this.moveRight());
+            if (!this.world.character.isDead()) {
+                if (this.x - this.world.character.x < 500) {
+                    this.endbossMove = true;
+                }
+                if (this.objectHurt) {
+                    this.playAnimation(this.IMAGES_HURT);
+                } else if (this.isDead() && this.deadTimer > 0) {
+                    this.playAnimation(this.IMAGES_DYING);
+                    this.EndbossDying.play();
+                    this.deadTimer--;
+                } else if (this.isDead() && this.deadTimer == 0) {
+                    this.gotKilled();
+                } else if (this.characterLeft(this)) {
+                    this.endbossMoving(this.moveLeft());
+                } else if (this.characterRight(this)) {
+                    this.endbossMoving(this.moveRight());
+                }
             }
         }, 100);
     }
@@ -119,9 +123,11 @@ class Endboss extends MovableObject {
     endbossMoving(move) {
         if (!this.isDead() && !this.objectHurt && this.endbossMove) {
             if (!this.checkIfCharacterAttackable()) {
+                this.speed = 6;
                 move;
                 this.playAnimation(this.IMAGES_WALKING);
             } else if (this.checkIfCharacterAttackable()) {
+                this.speed = 0;
                 this.playAnimation(this.IMAGES_ATTACKING);
                 this.EndbossScream.play();
                 setTimeout(() => {
@@ -130,15 +136,6 @@ class Endboss extends MovableObject {
             }
         }
     }
-
-
-    // characterLeft() {
-    //     return this.world.character.x + (this.world.character.width / 2) < (this.x + this.width / 2)
-    // }
-
-    // characterRight() {
-    //     return this.world.character.x + (this.world.character.width / 2) > (this.x + this.width / 2)
-    // }
 
 
     checkIfCharacterAttackable() {
@@ -159,7 +156,7 @@ class Endboss extends MovableObject {
 
 
     gotKilled() {
-        this.loadImage('img/troll/Troll_01_1_DIE_009.png');
+        this.animationTimer = this.loadImage('img/troll/Troll_01_1_DIE_009.png');
         setTimeout(() => {
             this.speed = 0.1;
             this.acceleration = 0.01;

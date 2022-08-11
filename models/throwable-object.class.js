@@ -80,7 +80,7 @@ class ThrowableObject extends MovableObject {
             if (this.DaggerColliding(enemy)) {
                 this.speed = 0;
                 this.loadImage('img/daggers/PNG/dagger9.png');
-                enemy.dyingEnemy();
+                enemy.energy = 0;
             }
         })
         this.world.level.endboss.forEach((endboss) => {
@@ -103,7 +103,7 @@ class ThrowableObject extends MovableObject {
             if (this.DaggerColliding(enemy)) {
                 this.speed = 0;
                 this.loadImage('img/daggers/PNG/dagger9.png');
-                enemy.dyingEnemy();
+                enemy.energy = 0;
             }
         })
         this.world.level.endboss.forEach((endboss) => {

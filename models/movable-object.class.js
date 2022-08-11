@@ -98,9 +98,9 @@ class MovableObject extends DrawableObject {
     hit(opponent) {
         if (!this.isHurt()) {
             if (opponent instanceof Minotaur) {
-                this.energy -= 5;
-            } else if (opponent instanceof Endboss) {
                 this.energy -= 10;
+            } else if (opponent instanceof Endboss) {
+                this.energy -= 15;
             }
             if (this.energy < 0) {
                 this.energy = 0;

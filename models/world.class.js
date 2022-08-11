@@ -31,14 +31,14 @@ class World {
 
 
     addMinotaur(){
-        // this.level.enemies.push(
-        //     new Minotaur(this), 
-        //     new Minotaur(this), 
-        //     new Minotaur(this),
-        //     new Minotaur(this),
-        //     new Minotaur(this),
-        //     new Minotaur(this)
-        //     )
+        this.level.enemies.push(
+            new Minotaur(this), 
+            new Minotaur(this), 
+            new Minotaur(this),
+            new Minotaur(this),
+            new Minotaur(this),
+            new Minotaur(this)
+            )
     }
     
     addEndboss(){
