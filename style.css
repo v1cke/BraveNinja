@@ -32,7 +32,7 @@ h1 {
 
 canvas {
     background-color: aquamarine;
-    display: block;
+    display: none;
     border-radius: 20px;
 }
 
@@ -64,15 +64,41 @@ canvas {
     height: 100vh;
     width: 100vw;
     display: flex;
-    justify-content: center;
+    justify-content: left;
     align-items: start;
     overflow: hidden;
+    background-image: url('img/start_screen.png');
+    background-size: 100%;
+    background-repeat: no-repeat;
+    max-width: 1000px;
+}
+
+#helpScreen{
+    display: none;
+}
+
+#BtnScreen{
+    display: none;
+}
+
+.btn {
+    margin-top: 1%;
+    margin-left: 1%;
+    border-color: transparent;
+    background-color: transparent;
+    width: 235px;
+    height: 90px;
+}
+
+.btn img{
+    border-radius: 20px;
+    width: 100%;
+    height: 100%;
 }
 
 .startImg {
-    max-width: 1200px;
+    max-width: 1000px;
     width: 100%;
-    border-radius: 50px;
 }
 
 .winnerImg {

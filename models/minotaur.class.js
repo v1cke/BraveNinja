@@ -77,14 +77,13 @@ class Minotaur extends MovableObject {
     ];
 
     constructor(world) {
-        super().loadImage('img/minotaur/Minotaur_01/Idle/Minotaur_01_Idle_000.png');
+        super().loadImage('img/minotaur/Minotaur_01/Idle Blink/Minotaur_01_Idle Blinking_000.png');
         this.x = 350 + Math.random() * 2500;  // math.random immer zwischen 0 und 1 (ohne 1), also in diesem Fall alles zwischen 0 und ca. 499
         this.loadImages(this.IMAGES_WALKING);
         this.loadImages(this.IMAGES_DYING);
         this.loadImages(this.IMAGES_ATTACK);
         this.loadImages(this.IMAGES_IDLE);
         this.world = world;
-        this.speed = 1 + Math.random() * 0.4;
         this.animate();
     }
     
@@ -115,7 +114,7 @@ class Minotaur extends MovableObject {
     enemieMoving(move) {
         if (!this.isDead()) {
             if (!this.checkIfCharacterAttackable()) {
-                this.speed = 1 + Math.random() * 0.4;
+                this.speed = Math.floor(Math.random() * 5);
                 move;
                 this.playAnimation(this.IMAGES_WALKING);
             } else if (this.checkIfCharacterAttackable()) {

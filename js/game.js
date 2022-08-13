@@ -11,11 +11,39 @@ function init() {
 
 function hideStartScreen() {
     document.getElementById('startScreen').style.display = "none";
-    if (document.getElementById('startScreen').style.display = "none") {
+    checkIfInitGame()
+}
+
+function showStartScreen() {
+    document.getElementById('startScreen').style.display = "flex";
+    document.getElementById('helpScreen').style.display = "none";
+    document.getElementById('btnScreen').style.display = "none";
+    checkIfInitGame()
+}
+
+function showHelpScreen() {
+    document.getElementById('startScreen').style.display = "none";
+    document.getElementById('helpScreen').style.display = "block";
+    document.getElementById('btnScreen').style.display = "none";
+    checkIfInitGame()
+}
+
+function showButtonScreen() {
+    document.getElementById('startScreen').style.display = "none";
+    document.getElementById('helpScreen').style.display = "none";
+    document.getElementById('btnScreen').style.display = "block";
+    checkIfInitGame()
+}
+
+
+function checkIfInitGame() {
+    if (document.getElementById('startScreen').style.display == "none" &&
+        document.getElementById('helpScreen').style.display == "none" &&
+        document.getElementById('btnScreen').style.display == "none") {
+        document.getElementById('canvas').style.display = "block";
         init()
     }
 }
-
 
 window.addEventListener("keydown", (e) => {
     if (e.keyCode == 37) {

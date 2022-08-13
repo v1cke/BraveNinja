@@ -33,7 +33,15 @@
     <h1>HENRY THE BRAVE NINJA</h1>
 
     <div id="startScreen" onclick="hideStartScreen()">
-        <img src="img/start_screen.png" class="startImg">
+        <button onclick="showButtonScreen()" class="btn"><img src="img/btn_buttons2.png"></button>;
+        <button onclick="showHelpScreen()" class="btn"><img src="img/btn_help2.png"></button>;
+        <!-- <img src="img/start_screen.png" class="startImg"> -->
+    </div>
+    <div id="helpScreen" onclick="showStartScreen()">
+        <img src="img/help_screen.png" class="startImg">
+    </div>
+    <div id="btnScreen" onclick="showStartScreen()">
+        <img src="img/btn_screen.png" class="startImg">
     </div>
 
     <canvas id="canvas" height="480px" width="780px">
