@@ -113,7 +113,8 @@ class Character extends MovableObject {
             this.looseGame.play();
             document.getElementById('GameOverScreen').style.display = "flex";
             document.getElementById('canvas').style.display = "none";
-        }, 5000);
+            document.getElementById('panelcontainer').style.display = "none";
+        }, 3000);
     }
 
 

@@ -30,12 +30,12 @@
 
 <body>
 
-    <h1>HENRY THE BRAVE NINJA</h1>
+    <h1><img src="img/headline.png" alt="Henry the brave Ninja"></h1>
 
-    <div id="startScreen" onclick="hideStartScreen()">
-        <button onclick="showButtonScreen()" class="btn"><img src="img/btn_buttons2.png"></button>;
-        <button onclick="showHelpScreen()" class="btn"><img src="img/btn_help2.png"></button>;
-        <!-- <img src="img/start_screen.png" class="startImg"> -->
+    <div id="startScreen" >
+            <button onclick="showButtonScreen()" class="btn"><img src="img/btn_buttons.png"></button>;
+            <button onclick="showHelpScreen()" class="btn"><img src="img/btn_help.png"></button>;
+            <button onclick="hideStartScreen()" class="btn"><img src="img/btn_letsplay.png"></button>;
     </div>
     <div id="helpScreen" onclick="showStartScreen()">
         <img src="img/help_screen.png" class="startImg">
@@ -47,23 +47,23 @@
     <canvas id="canvas" height="480px" width="780px">
 
     </canvas>
-    <div class="panelContainer">
-        <div class="btnContainer">
+    <div id="GameOverScreen" class="finishedGame">
+        <img src="img/Game_Over.png" class="finGameScreen" onclick="window.location.reload();">
+        <!-- <img src="img/restartBtn.png" class="restartBtn" onclick="window.location.reload();"> -->
+    </div>
+    <div id="wonGameScreen" class="finishedGame">
+        <img src="img/winner.jpg" class="finGameScreen" onclick="window.location.reload();">
+        <!-- <img src="img/restartBtn.png" class="restartBtn" onclick="window.location.reload();"> -->
+    </div>
+    <div id="panelcontainer" class="panelContainer">
+        <div class="playBtnContainer">
             <button id="btnLeft"><img src="img/icon/arrow-left.png"></button>
             <button id="btnRight"><img src="img/icon/arrow-right.png"></button>
         </div>
-        <div class="btnContainer">
+        <div class="playBtnContainer">
             <button id="btnUp"><img src="img/icon/arrow-up.png"></button>
             <button id="btnThrow"><img src="img/icon/arrow-throw.png"></button>
         </div>
-    </div>
-    <div id="GameOverScreen" class="d-none">
-        <img src="img/Game_Over.png" class="startImg">
-        <img src="img/restartBtn.png" class="restartBtn" onclick="window.location.reload();">
-    </div>
-    <div id="wonGameScreen" class="d-none">
-        <img src="img/winner.jpg" class="winnerImg">
-        <img src="img/restartBtn.png" class="restartBtn" onclick="window.location.reload();">
     </div>
 </body>
 
