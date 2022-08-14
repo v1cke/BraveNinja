@@ -8,6 +8,7 @@ class MovableObject extends DrawableObject {
     energy = 100;
     lastHit = 0;
     ninja_pickDagger = new Audio('audio/sword_pickup.mp3');
+    ninja_pickKey = new Audio('audio/keys_pick.mp3');
     objectHurt = false;
 
 
@@ -147,7 +148,7 @@ class MovableObject extends DrawableObject {
     }
 
     pickKeys() {
-        this.ninja_pickDagger.play();
+        this.ninja_pickKey.play();
         this.amount_keys++;
     }
 

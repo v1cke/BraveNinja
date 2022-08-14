@@ -31,7 +31,7 @@
 
 <body>
 
-    <h1><img src="img/headline.png" alt="Henry the brave Ninja"></h1>
+    <h1 id="headline"><img src="img/headline.png" alt="Henry the brave Ninja"></h1>
 
     <div id="startScreen" >
             <button onclick="showButtonScreen()" class="btn"><img src="img/btn_buttons.png"></button>;
@@ -50,20 +50,18 @@
     </canvas>
     <div id="GameOverScreen" class="finishedGame">
         <img src="img/Game_Over.png" class="finGameScreen" onclick="window.location.reload();">
-        <!-- <img src="img/restartBtn.png" class="restartBtn" onclick="window.location.reload();"> -->
     </div>
     <div id="wonGameScreen" class="finishedGame">
-        <img src="img/winner.jpg" class="finGameScreen" onclick="window.location.reload();">
-        <!-- <img src="img/restartBtn.png" class="restartBtn" onclick="window.location.reload();"> -->
+        <img src="img/winnerScreen.png" class="finGameScreen" onclick="window.location.reload();">
     </div>
     <div id="panelcontainer" class="panelContainer">
         <div class="playBtnContainer">
-            <button id="btnLeft"><img src="img/icon/arrow-left.png"></button>
-            <button id="btnRight"><img src="img/icon/arrow-right.png"></button>
+            <button id="btnLeft"><img src="img/icon/arrow-leftW.png"></button>
+            <button id="btnRight"><img src="img/icon/arrow-rightW.png"></button>
         </div>
         <div class="playBtnContainer">
-            <button id="btnUp"><img src="img/icon/arrow-up.png"></button>
-            <button id="btnThrow"><img src="img/icon/arrow-throw.png"></button>
+            <button id="btnUp"><img src="img/icon/arrow-upW.png"></button>
+            <button id="btnThrow"><img src="img/icon/arrow-throwW.png"></button>
         </div>
     </div>
 </body>

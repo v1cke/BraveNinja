@@ -106,7 +106,7 @@ class Character extends MovableObject {
 
     characterKilled() {
         this.playAnimation(this.IMAGES_DEAD);
-        // this.ninja_die.play();
+        this.ninja_die.play();
         this.loadImage('img/ninja/Dead__009.png');
         clearInterval(this.characterMovement);
         setTimeout(() => {
@@ -121,7 +121,7 @@ class Character extends MovableObject {
     playingCharacter() {
         if (this.isHurt()) {
             this.playAnimation(this.IMAGES_DEAD);
-            // this.ninja_hurt.play();
+            this.ninja_hurt.play();
         } else if (!this.world.keyboard.RIGHT || !this.world.keyboard.LEFT) {
             this.playAnimation(this.IMAGES_IDLE);
         }
@@ -132,7 +132,7 @@ class Character extends MovableObject {
                 this.playAnimation(this.IMAGES_WALKING);
             }
             if (this.world.keyboard.UP && !this.isAboveGround() && !this.isHurt() && !this.isDead()) {
-                // this.ninja_jump.play();
+                this.ninja_jump.play();
                 this.jump();
             }
         }
@@ -144,7 +144,7 @@ class Character extends MovableObject {
             this.x < level1.level_end_x &&
             !this.isDead()) {
             this.moveRight();
-            // this.ninja_running.play();
+            this.ninja_running.play();
         }
     }
 
@@ -153,7 +153,7 @@ class Character extends MovableObject {
             this.x > -500 &&
             !this.isDead()) {
             this.moveLeft();
-            // this.ninja_running.play();
+            this.ninja_running.play();
         }
     }
 
@@ -182,7 +182,6 @@ class Character extends MovableObject {
             if (this.isColliding(key)) {
                 this.pickKeys(key);
                 this.removeKey(key, i);
-                // this.world.daggerBar.setAmountDaggers(this.amount_daggers);
             }
         })
     }
