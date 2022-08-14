@@ -86,7 +86,7 @@ class Minotaur extends MovableObject {
         this.world = world;
         this.animate();
     }
-    
+
 
     animate() {
         this.enemyLife = setInterval(() => {
@@ -94,19 +94,19 @@ class Minotaur extends MovableObject {
                 this.playAnimation(this.IMAGES_IDLE);
             }
             if (!this.world.character.isDead()) {
-            if (this.isDead() && this.deadTimer > 0) {
-                this.playAnimation(this.IMAGES_DYING);
-                this.enemy_dying.play();
-                this.deadTimer--;
-            } else if (this.isDead() && this.deadTimer == 0) {
-                this.enemy_dying.pause();
-                this.gotKilled();
-            } else if (this.characterLeft(this)) {
-                this.enemieMoving(this.moveLeft());
-            } else if (this.characterRight(this)) {
-                this.enemieMoving(this.moveRight());
+                if (this.isDead() && this.deadTimer > 0) {
+                    this.playAnimation(this.IMAGES_DYING);
+                    this.enemy_dying.play();
+                    this.deadTimer--;
+                } else if (this.isDead() && this.deadTimer == 0) {
+                    this.enemy_dying.pause();
+                    this.gotKilled();
+                } else if (this.characterLeft(this)) {
+                    this.enemieMoving(this.moveLeft());
+                } else if (this.characterRight(this)) {
+                    this.enemieMoving(this.moveRight());
+                }
             }
-        }
         }, 50);
     }
 
@@ -142,6 +142,7 @@ class Minotaur extends MovableObject {
 
 
     gotKilled() {
+        clearInterval(this.enemyLife);
         this.enemyLife = this.loadImage('img/minotaur/Minotaur_01/Dying/Minotaur_01_Dying_014.png');
         setTimeout(() => {
             this.speed = 0.03;

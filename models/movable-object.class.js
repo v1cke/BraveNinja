@@ -146,4 +146,9 @@ class MovableObject extends DrawableObject {
         this.amount_daggers++;
     }
 
+    pickKeys() {
+        this.ninja_pickDagger.play();
+        this.amount_keys++;
+    }
+
 }

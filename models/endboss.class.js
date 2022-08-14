@@ -13,7 +13,6 @@ class Endboss extends MovableObject {
     deadTimer = 8;
 
 
-
     IMAGES_IDLE = [
         'img/troll/Troll_01_1_IDLE_000.png',
         'img/troll/Troll_01_1_IDLE_001.png',
@@ -121,7 +120,8 @@ class Endboss extends MovableObject {
 
 
     endbossMoving(move) {
-        if (!this.isDead() && !this.objectHurt && this.endbossMove) {
+        if (!this.isDead() && !this.objectHurt &&
+         this.endbossMove) {
             if (!this.checkIfCharacterAttackable()) {
                 this.speed = 6;
                 move;

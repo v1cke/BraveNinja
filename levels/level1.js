@@ -52,5 +52,8 @@ const level1 = new Level(
         new Dagger('img/daggers/PNG/dagger.png', 2200, 0),
         new Dagger('img/daggers/PNG/dagger.png', 2350, 0),
     ],
+    [
+        
+    ],
 
     );

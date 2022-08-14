@@ -25,9 +25,12 @@ class Treasure extends MovableObject {
 
     checkTreasureChest() {
         this.getTreasure = setInterval(() => {
-            if (this.world.character.x > 2550 && this.world.character.x < 2850) {
+            if (this.world.character.x > 2550 && this.world.character.x < 2900) {
                 this.playAnimation(this.IMAGES_CHEST_LOCKED);
-            } else if (this.world.character.x > 2850 && this.world.level.enemies.length < 1 && this.world.level.endboss.length < 1) {
+            } else if (this.world.character.x > 2850 && 
+                this.world.level.enemies.length < 1 && 
+                this.world.level.endboss.length < 1 &&
+                this.world.character.amount_keys == 2) {
                 this.treasureFound();
             }
         }, 200);

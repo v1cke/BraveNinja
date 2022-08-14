@@ -161,6 +161,7 @@ class Character extends MovableObject {
         this.checkCollisionEnemies();
         this.checkCollisionEndboss();
         this.checkPickDaggers();
+        this.checkPickKeys()
     }
 
 
@@ -175,8 +176,23 @@ class Character extends MovableObject {
         })
     }
 
+    checkPickKeys() {
+        this.world.level.keys.forEach((key) => {
+            let i = this.world.level.keys.indexOf(key);
+            if (this.isColliding(key)) {
+                this.pickKeys(key);
+                this.removeKey(key, i);
+                // this.world.daggerBar.setAmountDaggers(this.amount_daggers);
+            }
+        })
+    }
+
     removeDagger(dagger, i) {
         this.world.level.daggers.splice(i, 1);
+    }
+
+    removeKey(key, i) {
+        this.world.level.keys.splice(i, 1);
     }
 
     checkCollisionEndboss() {

@@ -1,5 +1,6 @@
 class DrawableObject {
     amount_daggers = 0;
+    amount_keys = 0;
     x = 100;
     y = 370;
     img;

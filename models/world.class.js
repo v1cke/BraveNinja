@@ -30,18 +30,18 @@ class World {
     }
 
 
-    addMinotaur(){
+    addMinotaur() {
         this.level.enemies.push(
-            new Minotaur(this), 
-            new Minotaur(this), 
+            new Minotaur(this),
+            new Minotaur(this),
             new Minotaur(this),
             new Minotaur(this),
             new Minotaur(this),
             new Minotaur(this)
-            )
+        )
     }
-    
-    addEndboss(){
+
+    addEndboss() {
         this.level.endboss.push(
             new Endboss(this))
     }
@@ -50,10 +50,20 @@ class World {
     run() {
         setInterval(() => {
             this.checkThrowObjects();
+            this.checkKeysAvailable();
             this.spliceEnemiesEndboss();
         }, 100);
     }
 
+    checkKeysAvailable() {
+        if (this.level.enemies.length < 1 && this.level.endboss.length > 0 && this.character.amount_keys < 1 && this.level.keys.length < 1) {
+            this.level.keys.push(new Key(this));
+        } else if (this.level.endboss.length < 1 && this.level.enemies.length > 0 && this.character.amount_keys < 1 && this.level.keys.length < 1) {
+            this.level.keys.push(new Key(this));
+        } else if (this.level.enemies.length < 1 && this.level.endboss.length < 1 && this.character.amount_keys < 2 && this.level.keys.length < 1) {
+            this.level.keys.push(new Key(this));
+        }
+    }
 
     checkThrowObjects() {
         if (this.keyboard.SPACE) {
@@ -67,7 +77,7 @@ class World {
     }
 
 
-    spliceEnemiesEndboss(){
+    spliceEnemiesEndboss() {
         this.level.endboss.forEach((endboss) => {
             let i = this.level.endboss.indexOf(endboss);
             if (this.level.endboss[i].y > 700) {
@@ -91,6 +101,7 @@ class World {
         this.addObjectsToMap(this.level.enemies);
         this.addObjectsToMap(this.level.endboss);
         this.addObjectsToMap(this.level.daggers);
+        this.addObjectsToMap(this.level.keys);
         this.addToMap(this.treasureChest);
         this.ctx.translate(-this.camera_x, 0); //move camera back for statusbar not move with background
         this.addToMap(this.statusBar);
