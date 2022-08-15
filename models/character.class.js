@@ -88,8 +88,8 @@ class Character extends MovableObject {
             this.checkRunRight();
             this.checkRunLeft();
             this.world.camera_x = - this.x + 250;
-            if (this.y > 345) {
-                this.y = 345
+            if (this.y > 335) {
+                this.y = 335
             }
         }, 20);
 

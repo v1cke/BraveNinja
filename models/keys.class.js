@@ -5,7 +5,7 @@ class Key extends MovableObject {
 
     constructor(world) {
         super().loadImage('img/key.png');
-        this.x = Math.random() * 2500;
+        this.x = 1000 + Math.random() * 1500;
         this.y = 400;
         this.world = world;
     }

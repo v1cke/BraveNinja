@@ -2,7 +2,7 @@ class DrawableObject {
     amount_daggers = 0;
     amount_keys = 0;
     x = 100;
-    y = 370;
+    y = 360;
     img;
     width = 100;
     height = 100;

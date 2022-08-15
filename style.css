@@ -40,9 +40,11 @@ canvas {
 }
 
 .panelContainer {
+    position: absolute;
+    bottom: 2px;
     display: none;
     justify-content: space-between;
-    width: 500px;
+    width: 100%;
     margin-top: 10px;
 }
 
@@ -62,8 +64,20 @@ canvas {
     height: 50px;
 }
 
+.turnIt {
+    display: none;
+    position: absolute;
+    top: 60%;
+    left: 10%;
+    color: azure;
+    font-size: 50px;
+    font-weight: 900;
+    z-index: 5;
+}
+
 
 #startScreen {
+    position: relative;
     height: 480px;
     width: 780px;
     display: flex;
@@ -128,12 +142,8 @@ canvas {
 /* smartphone */
 @media only screen and (max-width: 780px) {
     canvas {
-        width: 80%;
-    }
-
-    body {
-        background-size: cover;
-        background-repeat: no-repeat;
+        width: 100% !important;
+        /* height: unset; */
     }
 
     #startScreen, #helpScreen, #btnScreen, .finishedGame {
@@ -146,8 +156,8 @@ canvas {
     }
 
     .startImg, .finGameScreen {
-        height: 80%;
-        width: 80%;
+        height: 100%;
+        width: 100%;
         border-radius: 0px;
         object-fit: contain;
     }
@@ -160,7 +170,7 @@ canvas {
 /* smartphone */
 @media only screen and (max-height: 480px) {
     canvas {
-        height: 80vh;
+        height: 100vh;
     }
 
     #startScreen, #helpScreen, #btnScreen, .finishedGame {

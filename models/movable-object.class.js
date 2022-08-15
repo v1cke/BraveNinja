@@ -32,7 +32,7 @@ class MovableObject extends DrawableObject {
             return this.y < 800;
         }
         if (this instanceof Character) {
-            return this.y < 345;
+            return this.y < 335;
         }
     }
 

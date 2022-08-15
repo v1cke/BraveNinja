@@ -9,6 +9,24 @@ function init() {
     world = new World(canvas, keyboard);
 }
 
+function checkDevice(){
+    setInterval(() => {
+        let screenW = screen.width;
+        let screenH = screen.height;
+        let turnDevice = document.getElementById('turnDevice');
+        if (screenW < 500 && screenH > 500) {
+            turnDevice.style.display = "block";
+            document.getElementById('startBtn').style.display = "none";
+            document.getElementById('panelcontainer').style.display = "none";
+        } else {
+            turnDevice.style.display = "none";
+            document.getElementById('startBtn').style.display = "block";
+            document.getElementById('panelcontainer').style.display = "flex";
+        }
+    }, 100);
+}
+
+
 function hideStartScreen() {
     document.getElementById('startScreen').style.display = "none";
     document.getElementById('helpScreen').style.display = "none";
@@ -22,7 +40,6 @@ function showStartScreen() {
     document.getElementById('helpScreen').style.display = "none";
     document.getElementById('btnScreen').style.display = "none";
     document.getElementById('canvas').style.display = "none";
-    // checkIfInitGame();
 }
 
 function showHelpScreen() {
@@ -30,7 +47,6 @@ function showHelpScreen() {
     document.getElementById('helpScreen').style.display = "block";
     document.getElementById('btnScreen').style.display = "none";
     document.getElementById('canvas').style.display = "none";
-    // checkIfInitGame();
 }
 
 function showButtonScreen() {

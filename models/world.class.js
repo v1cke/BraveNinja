@@ -51,8 +51,18 @@ class World {
         setInterval(() => {
             this.checkThrowObjects();
             this.checkKeysAvailable();
+            this.checkDeviceDirection();
             this.spliceEnemiesEndboss();
         }, 100);
+    }
+
+    checkDeviceDirection() {
+        let screenW = screen.width;
+        let screenH = screen.height;
+        let turnDevice = document.getElementById('turnDevice');
+        if (screenW < 500 && screenH > 500) {
+            turnDevice.style.display = "block"
+        } else {turnDevice.style.display = "none"}
     }
 
     checkKeysAvailable() {
