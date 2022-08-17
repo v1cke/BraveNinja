@@ -3,27 +3,69 @@ let world;
 let keyboard = new Keyboard();
 let gamemusic = new Audio('audio/music.mp3');
 let musicOn = true;
+let game = document.documentElement;
 
 function init() {
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
 }
 
-function checkDevice(){
+function checkDevice() {
     setInterval(() => {
         let screenW = screen.width;
         let screenH = screen.height;
         let turnDevice = document.getElementById('turnDevice');
-        if (screenW < 500 && screenH > 500) {
-            turnDevice.style.display = "block";
-            document.getElementById('startBtn').style.display = "none";
-            document.getElementById('panelcontainer').style.display = "none";
-        } else {
-            turnDevice.style.display = "none";
-            document.getElementById('startBtn').style.display = "block";
-            document.getElementById('panelcontainer').style.display = "flex";
+        if (isMobile()) {
+            if (screenW < 500 && screenH > 500) {
+                turnDevice.style.display = "block";
+                document.getElementById('startBtn').style.display = "none";
+                document.getElementById('panelcontainer').style.display = "none";
+                closeFullscreen(game);
+            } else {
+                turnDevice.style.display = "none";
+                document.getElementById('startBtn').style.display = "block";
+                document.getElementById('panelcontainer').style.display = "flex";
+                // openFullscreen(game);
+            }
+        }
+        else if (!isMobile()){
+            closeFullscreen(game);
         }
     }, 100);
+}
+
+
+function isMobile() {
+    // credit to Timothy Huang for this regex test: 
+    // https://dev.to/timhuang/a-simple-way-to-detect-if-browser-is-on-a-mobile-device-with-javascript-44j3
+    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+        return true
+    }
+    else {
+        return false
+    }
+}
+
+
+function openFullscreen() {
+    game;
+    if (game.requestFullscreen) {
+        game.requestFullscreen();
+    } else if (game.webkitRequestFullscreen) { /* Safari */
+        game.webkitRequestFullscreen();
+    } else if (game.msRequestFullscreen) { /* IE11 */
+        game.msRequestFullscreen();
+    }
+}
+
+function closeFullscreen() {
+    if (game.exitFullscreen) {
+        game.exitFullscreen();
+    } else if (game.webkitexitFullscreen) { /* Safari */
+        game.webkitexitFullscreen();
+    } else if (game.msexitFullscreen) { /* IE11 */
+        game.msexitFullscreen();
+    }
 }
 
 
