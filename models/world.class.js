@@ -11,6 +11,22 @@ class World {
     treasureChest = new Treasure(this);
     daggerBar = new Daggerbar();
     throwableDagger = [];
+    soundsOn = true;
+    audio = [
+        new Audio('audio/music.mp3'),
+        new Audio('audio/ninja_die.mp3'),
+        new Audio('audio/ninja_hurt.mp3'),
+        new Audio('audio/ninja_jump.mp3'),
+        new Audio('audio/ninja_running.mp3'),
+        new Audio('audio/enemy_dying.mp3'),
+        new Audio('audio/enemy_scream.mp3'),
+        new Audio('audio/endboss_die.mp3'),
+        new Audio('audio/sword_pickup.mp3'),
+        new Audio('audio/sword_throw.mp3'),
+        new Audio('audio/keys_pick.mp3'),
+        new Audio('audio/youLose.mp3'),
+        new Audio('audio/youwon.mp3'),
+    ];
 
 
     constructor(canvas, keyboard) {
@@ -19,14 +35,44 @@ class World {
         this.keyboard = keyboard;
         this.draw();
         this.setWorld();
-        this.run();
+        this.runGame();
         this.keyboard.btnPressEvents();
         this.addMinotaur();
         this.addEndboss();
     };
 
+
+    changeSoundSettings() {
+        if (!this.soundsOn && this.keyboard.M) {
+            this.playSounds();
+        } else if (this.soundsOn && this.keyboard.M)
+            this.muteSounds();
+    }
+
+
+    playSounds() {
+        this.audio.forEach((sound) => {
+            let i = this.audio.indexOf(sound);
+            this.audio[i].volume = 1;
+        });
+        this.audio[0].volume = 0.5;
+        this.soundsOn = true;
+    }
+
+    muteSounds() {
+        this.audio.forEach((sound) => {
+            let i = this.audio.indexOf(sound);
+            this.audio[i].volume = 0;
+        });
+        this.soundsOn = false;
+    }
+
+
+
     setWorld() {
         this.throwableObject.world = this;
+        this.audio[0].play();
+        this.audio[0].volume = 0.5;
     }
 
 
@@ -47,11 +93,12 @@ class World {
     }
 
 
-    run() {
+    runGame() {
         setInterval(() => {
             this.checkThrowObjects();
             this.checkKeysAvailable();
             this.spliceEnemiesEndboss();
+            this.changeSoundSettings();
         }, 75);
     }
 
@@ -66,7 +113,7 @@ class World {
     }
 
     checkThrowObjects() {
-        if (this.keyboard.SPACE) {
+        if (this.keyboard.SPACE && !this.character.isDead()) {
             if (this.character.amount_daggers > 0) {
                 this.character.amount_daggers--;
                 this.daggerBar.setAmountDaggers(this.character.amount_daggers);

@@ -5,8 +5,6 @@ class Endboss extends MovableObject {
     currentImage = 0;
     width = 300;
     height = 400;
-    EndbossScream = new Audio('audio/enemy_scream.mp3');
-    EndbossDying = new Audio('audio/endboss_die.mp3');
     world;
     endbossMove = false;
     lastHit;
@@ -102,10 +100,11 @@ class Endboss extends MovableObject {
                     this.endbossMove = true;
                 }
                 if (this.objectHurt) {
+                    this.world.audio[6].play();
                     this.playAnimation(this.IMAGES_HURT);
                 } else if (this.isDead() && this.deadTimer > 0) {
                     this.playAnimation(this.IMAGES_DYING);
-                    this.EndbossDying.play();
+                    this.world.audio[7].play();
                     this.deadTimer--;
                 } else if (this.isDead() && this.deadTimer == 0) {
                     this.gotKilled();
@@ -129,9 +128,9 @@ class Endboss extends MovableObject {
             } else if (this.checkIfCharacterAttackable()) {
                 this.speed = 0;
                 this.playAnimation(this.IMAGES_ATTACKING);
-                this.EndbossScream.play();
+                this.world.audio[6].play();
                 setTimeout(() => {
-                    this.EndbossScream.pause();
+                    this.world.audio[6].pause();
                 }, 1500);
             }
         }

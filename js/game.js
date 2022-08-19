@@ -1,8 +1,6 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
-let gamemusic = new Audio('audio/music.mp3');
-let musicOn = true;
 let game = document.documentElement;
 
 
@@ -10,6 +8,7 @@ function init() {
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
 }
+
 
 function checkDevice() {
     setInterval(() => {
@@ -112,8 +111,7 @@ function showHelpScreen() {
     document.getElementById('startScreen').style.display = "none";
     document.getElementById('helpScreen').style.display = "block";
     document.getElementById('btnScreen').style.display = "none";
-    document.getElementById('canvas').style.display = "none";
-    document.getElementById('panelcontainer').style.display = "none";
+    document.getElementById('canvas').style.display = "none";uhj
 }
 
 function showButtonScreen() {
@@ -148,6 +146,9 @@ window.addEventListener("keydown", (e) => {
     if (e.keyCode == 32) {
         keyboard.SPACE = true;
     }
+    if (e.keyCode == 77) {
+        keyboard.M = true;
+    }
 })
 
 
@@ -166,5 +167,8 @@ window.addEventListener("keyup", (e) => {
     }
     if (e.keyCode == 32) {
         keyboard.SPACE = false;
+    }
+    if (e.keyCode == 77) {
+        keyboard.M = false;
     }
 })

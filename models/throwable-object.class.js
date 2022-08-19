@@ -5,7 +5,6 @@ class ThrowableObject extends MovableObject {
     speed = 13;
     width = 60;
     height = 30;
-    ninja_ThrowDagger = new Audio('audio/sword_throw.mp3');
     direction;
     throwingDaggers;
 
@@ -35,7 +34,7 @@ class ThrowableObject extends MovableObject {
         this.x = x;
         this.y = y;
         this.checkDaggerNeeded();
-        this.checkDaggerCollision();
+        this.throwDagger();
     }
 
     DaggerColliding(mo) {
@@ -68,20 +67,20 @@ class ThrowableObject extends MovableObject {
     }
 
 
-    checkDaggerCollision() {
+    throwDagger() {
         this.applyGravity();
-        this.ninja_ThrowDagger.play();
+        // this.world.audio[9].play();
         this.throwingDaggers = setInterval(() => {
             if (!this.direction) {
-                this.throwDagger(this.moveRight())
+                this.checkDaggerCollision(this.moveRight())
             } else if (this.direction) {
-                this.throwDagger(this.moveLeft());
+                this.checkDaggerCollision(this.moveLeft());
             }
         }, 25)
     }
 
 
-    throwDagger(direction) {
+    checkDaggerCollision(direction) {
         direction;
         this.world.level.enemies.forEach((enemy) => {
             if (this.DaggerColliding(enemy)) {

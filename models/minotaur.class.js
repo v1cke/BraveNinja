@@ -1,7 +1,6 @@
 class Minotaur extends MovableObject {
 
     world;
-    enemy_dying = new Audio('audio/enemy_dying.mp3');
     deadTimer = 13;
     otherDirection = false;
     enemyLife;
@@ -96,10 +95,10 @@ class Minotaur extends MovableObject {
             if (!this.world.character.isDead()) {
                 if (this.isDead() && this.deadTimer > 0) {
                     this.playAnimation(this.IMAGES_DYING);
-                    this.enemy_dying.play();
+                    this.world.audio[5].play();
                     this.deadTimer--;
                 } else if (this.isDead() && this.deadTimer == 0) {
-                    this.enemy_dying.pause();
+                    this.world.audio[5].pause();
                     this.gotKilled();
                 } else if (this.characterLeft(this)) {
                     this.enemieMoving(this.moveLeft());

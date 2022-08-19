@@ -3,6 +3,7 @@ class Keyboard {
     RIGHT = false;
     UP = false;
     SPACE = false;
+    M = false;
     world;
 
 

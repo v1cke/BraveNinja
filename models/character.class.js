@@ -5,11 +5,6 @@ class Character extends MovableObject {
     world;
     speed = 9;
     characterMovement;
-    ninja_running = new Audio('audio/ninja_running.mp3');
-    ninja_jump = new Audio('audio/ninja_jump.mp3');
-    ninja_hurt = new Audio('audio/ninja_hurt.mp3');
-    ninja_die = new Audio('audio/ninja_die.mp3');
-    looseGame = new Audio('audio/youLose.mp3');
 
 
     IMAGES_IDLE = [
@@ -84,7 +79,7 @@ class Character extends MovableObject {
      */
     animate() {
         setInterval(() => {
-            this.ninja_running.pause();
+            this.world.audio[4].pause();
             this.checkRunRight();
             this.checkRunLeft();
             this.world.camera_x = - this.x + 250;
@@ -106,11 +101,11 @@ class Character extends MovableObject {
 
     characterKilled() {
         this.playAnimation(this.IMAGES_DEAD);
-        this.ninja_die.play();
+        this.world.audio[1].play();
         this.loadImage('img/ninja/Dead__009.png');
         clearInterval(this.characterMovement);
         setTimeout(() => {
-            this.looseGame.play();
+            this.world.audio[11].play();
             document.getElementById('GameOverScreen').style.display = "flex";
             document.getElementById('canvas').style.display = "none";
         }, 3000);
@@ -120,7 +115,7 @@ class Character extends MovableObject {
     playingCharacter() {
         if (this.isHurt()) {
             this.playAnimation(this.IMAGES_DEAD);
-            this.ninja_hurt.play();
+            this.world.audio[2].play();
         } else if (!this.world.keyboard.RIGHT || !this.world.keyboard.LEFT) {
             this.playAnimation(this.IMAGES_IDLE);
         }
@@ -131,7 +126,7 @@ class Character extends MovableObject {
                 this.playAnimation(this.IMAGES_WALKING);
             }
             if (this.world.keyboard.UP && !this.isAboveGround() && !this.isHurt() && !this.isDead()) {
-                this.ninja_jump.play();
+                this.world.audio[3].play();
                 this.jump();
             }
         }
@@ -143,7 +138,7 @@ class Character extends MovableObject {
             this.x < level1.level_end_x &&
             !this.isDead()) {
             this.moveRight();
-            this.ninja_running.play();
+            this.world.audio[4].play();
         }
     }
 
@@ -152,7 +147,7 @@ class Character extends MovableObject {
             this.x > -500 &&
             !this.isDead()) {
             this.moveLeft();
-            this.ninja_running.play();
+            this.world.audio[4].play();
         }
     }
 

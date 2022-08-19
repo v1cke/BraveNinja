@@ -4,7 +4,6 @@ class Treasure extends MovableObject {
     currentImage = 0;
     width = 150;
     height = 220;
-    wonGame = new Audio('audio/youwon.mp3');
 
 
     IMAGES_CHEST_LOCKED = [
@@ -40,7 +39,7 @@ class Treasure extends MovableObject {
         this.loadImage('img/treasurebox/box_opened1.png')
         setTimeout(() => {
             this.loadImage('img/treasurebox/box_opened2.png')
-            this.wonGame.play();
+            this.world.audio[12].play();
         }, 1500);
         clearInterval(this.getTreasure);
         setTimeout(() => {
