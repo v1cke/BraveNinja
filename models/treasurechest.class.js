@@ -46,7 +46,6 @@ class Treasure extends MovableObject {
         setTimeout(() => {
             document.getElementById('wonGameScreen').style.display = "flex";
             document.getElementById('canvas').style.display = "none";
-            document.getElementById('panelcontainer').style.display = "none";
             document.getElementById('headline').style.display = "none";
         }, 3000);
     }

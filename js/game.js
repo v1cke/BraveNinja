@@ -5,6 +5,7 @@ let gamemusic = new Audio('audio/music.mp3');
 let musicOn = true;
 let game = document.documentElement;
 
+
 function init() {
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
@@ -12,23 +13,14 @@ function init() {
 
 function checkDevice() {
     setInterval(() => {
-        let screenW = screen.width;
-        let screenH = screen.height;
-        let turnDevice = document.getElementById('turnDevice');
         if (isMobile()) {
-            if (screenW < 500 && screenH > 500) {
-                turnDevice.style.display = "block";
-                document.getElementById('startBtn').style.display = "none";
-                document.getElementById('panelcontainer').style.display = "none";
-                closeFullscreen(game);
-            } else {
-                turnDevice.style.display = "none";
-                document.getElementById('startBtn').style.display = "block";
-                document.getElementById('panelcontainer').style.display = "flex";
-                // openFullscreen(game);
+            if (!landscape()) {
+                devicePortrait();
+            } else if (landscape()) {
+                deviceLandscape();
+                checkPanelcontainerNeeded();
             }
-        }
-        else if (!isMobile()){
+        } else if (!isMobile()) {
             closeFullscreen(game);
         }
     }, 100);
@@ -38,7 +30,7 @@ function checkDevice() {
 function isMobile() {
     // credit to Timothy Huang for this regex test: 
     // https://dev.to/timhuang/a-simple-way-to-detect-if-browser-is-on-a-mobile-device-with-javascript-44j3
-    if (/Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+    if (/Android|webOS|BlackBerry|iPhone|iPad|iPod|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
         return true
     }
     else {
@@ -47,11 +39,43 @@ function isMobile() {
 }
 
 
+function landscape() {
+    let screenW = screen.width;
+    let screenH = screen.height;
+    if (screenW < screenH) {
+        return false
+    } else if (screenW > screenH) {
+        return true
+    }
+}
+
+
+function deviceLandscape() {
+    document.getElementById('turnDevice').style.display = "none";
+    document.getElementById('startBtn').style.display = "block";
+    document.getElementById('panelcontainer').style.display = "flex";
+    openFullscreen();
+}
+
+function devicePortrait() {
+    document.getElementById('turnDevice').style.display = "block";
+    document.getElementById('startBtn').style.display = "none";
+    document.getElementById('panelcontainer').style.display = "none";
+    closeFullscreen();
+}
+
+
+function checkPanelcontainerNeeded() {
+    if (document.getElementById('GameOverScreen').style.display == "flex" || document.getElementById('wonGameScreen').style.display == "flex")
+        document.getElementById('panelcontainer').style.display = "none";
+}
+
+
 function openFullscreen() {
     game;
-    if (game.requestFullscreen) {
+    if (!game.requestFullscreen) {
         game.requestFullscreen();
-    } else if (game.webkitRequestFullscreen) { /* Safari */
+    } else if (!game.webkitRequestFullscreen) { /* Safari */
         game.webkitRequestFullscreen();
     } else if (game.msRequestFullscreen) { /* IE11 */
         game.msRequestFullscreen();
@@ -89,6 +113,7 @@ function showHelpScreen() {
     document.getElementById('helpScreen').style.display = "block";
     document.getElementById('btnScreen').style.display = "none";
     document.getElementById('canvas').style.display = "none";
+    document.getElementById('panelcontainer').style.display = "none";
 }
 
 function showButtonScreen() {
