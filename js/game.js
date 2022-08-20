@@ -22,6 +22,10 @@ function checkDevice() {
         } else if (!isMobile()) {
             closeFullscreen(game);
         }
+        if (isAppleDevice()) {
+            deviceLandscape();
+            checkPanelcontainerNeeded();
+        }
     }, 100);
 }
 
@@ -29,7 +33,18 @@ function checkDevice() {
 function isMobile() {
     // credit to Timothy Huang for this regex test: 
     // https://dev.to/timhuang/a-simple-way-to-detect-if-browser-is-on-a-mobile-device-with-javascript-44j3
-    if (/Android|webOS|BlackBerry|iPhone|iPad|iPod|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+    if (/Android|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
+        return true
+    }
+    else {
+        return false
+    }
+}
+
+function isAppleDevice() {
+    // credit to Timothy Huang for this regex test: 
+    // https://dev.to/timhuang/a-simple-way-to-detect-if-browser-is-on-a-mobile-device-with-javascript-44j3
+    if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
         return true
     }
     else {
@@ -72,9 +87,9 @@ function checkPanelcontainerNeeded() {
 
 function openFullscreen() {
     game;
-    if (!game.requestFullscreen) {
+    if (game.requestFullscreen) {
         game.requestFullscreen();
-    } else if (!game.webkitRequestFullscreen) { /* Safari */
+    } else if (game.webkitRequestFullscreen) { /* Safari */
         game.webkitRequestFullscreen();
     } else if (game.msRequestFullscreen) { /* IE11 */
         game.msRequestFullscreen();
@@ -111,7 +126,7 @@ function showHelpScreen() {
     document.getElementById('startScreen').style.display = "none";
     document.getElementById('helpScreen').style.display = "block";
     document.getElementById('btnScreen').style.display = "none";
-    document.getElementById('canvas').style.display = "none";uhj
+    document.getElementById('canvas').style.display = "none";
 }
 
 function showButtonScreen() {
