@@ -1,5 +1,5 @@
 class BossHealthBar extends DrawableObject {
-    
+
     IMAGES_HEALTH = [
         'img/barelements/bar_bosshealth/bosshealthbar_0.png',
         'img/barelements/bar_bosshealth/bosshealthbar_1.png',
@@ -10,11 +10,11 @@ class BossHealthBar extends DrawableObject {
 
     ];
 
-    
+
     percentage = 100;
 
 
-    constructor(){
+    constructor() {
         super();
         this.loadImages(this.IMAGES_HEALTH);
         this.x = 550;
@@ -25,15 +25,22 @@ class BossHealthBar extends DrawableObject {
     }
 
 
-    setPercentage(percentage){
+    /**
+     * function to set percentage of left health energy of endboss and redraw endboss healthbar with left energy
+     * @param {number} percentage - left energy / starting energy (100)
+     */
+    setPercentage(percentage) {
         this.percentage = percentage;
         let path = this.IMAGES_HEALTH[this.resolveImageIndex()];
         this.img = this.imageCache[path];
     }
 
-
-    resolveImageIndex(){
-        if(this.percentage > 80) {
+    /**
+     * 
+     * @returns the healthbar picture depending on left endboss-energy (health)
+     */
+    resolveImageIndex() {
+        if (this.percentage > 80) {
             return 5;
         } else if (this.percentage > 60) {
             return 4;

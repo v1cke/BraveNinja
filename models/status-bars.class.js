@@ -8,7 +8,6 @@ class Statusbar extends DrawableObject {
         'img/barelements/bar_health/80.png',
         'img/barelements/bar_health/100.png',
     ];
-
     
     percentage = 100;
 
@@ -23,7 +22,10 @@ class Statusbar extends DrawableObject {
         this.setPercentage(100);
     }
 
-
+    /**
+     * function to set percentage of left health energy of character and redraw character healthbar with left energy
+     * @param {number} percentage - left energy / starting energy (100)
+     */
     setPercentage(percentage){
         this.percentage = percentage;
         let path = this.IMAGES_HEALTH[this.resolveImageIndex()];
@@ -31,6 +33,10 @@ class Statusbar extends DrawableObject {
     }
 
 
+    /**
+     * 
+     * @returns the healthbar picture depending on left character-energy (health)
+     */
     resolveImageIndex(){
         if(this.percentage > 80) {
             return 5;

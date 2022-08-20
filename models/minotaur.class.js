@@ -75,6 +75,7 @@ class Minotaur extends MovableObject {
         'img/minotaur/Minotaur_01/Attacking/Minotaur_01_Attacking_011.png'
     ];
 
+
     constructor(world) {
         super().loadImage('img/minotaur/Minotaur_01/Idle Blink/Minotaur_01_Idle Blinking_000.png');
         this.x = 350 + Math.random() * 2500;  // math.random immer zwischen 0 und 1 (ohne 1), also in diesem Fall alles zwischen 0 und ca. 499
@@ -87,6 +88,11 @@ class Minotaur extends MovableObject {
     }
 
 
+    /**
+     * executes idle animation when character is dead or not closer than 500px to endboss
+     * executes dying animation when character jumps on top of enemy or get hit by dagger
+     * executes moving left or right (folowing character) when movement triggered by character
+     */
     animate() {
         this.enemyLife = setInterval(() => {
             if (this.world.character.isDead()) {
@@ -110,6 +116,11 @@ class Minotaur extends MovableObject {
     }
 
 
+    /**
+     * function for moving enemy left or right
+     * attacking character when close enough to hit
+     * @param {Function} move - moving function and animation to left or right
+     */
     enemieMoving(move) {
         if (!this.isDead()) {
             if (!this.checkIfCharacterAttackable()) {
@@ -123,6 +134,10 @@ class Minotaur extends MovableObject {
         }
     }
 
+    /**
+     * function to check if character close enough to attack
+     * @returns attackable or not attackable
+     */
     checkIfCharacterAttackable() {
         if (this.characterLeft(this)) {
             if (this.world.character.x + this.world.character.width - 10 >= this.x) {
@@ -140,6 +155,9 @@ class Minotaur extends MovableObject {
     }
 
 
+    /**
+     * executes dying animation 
+     */
     gotKilled() {
         clearInterval(this.enemyLife);
         this.enemyLife = this.loadImage('img/minotaur/Minotaur_01/Dying/Minotaur_01_Dying_014.png');

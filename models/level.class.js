@@ -7,6 +7,7 @@ class Level {
     daggers;
     keys;
 
+
     constructor(backgroundObjects, clouds, enemies, endboss, daggers, keys) {
         this.backgroundObjects = backgroundObjects;
         this.clouds = clouds;

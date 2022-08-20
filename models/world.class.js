@@ -42,6 +42,9 @@ class World {
     };
 
 
+    /**
+     * function enable / disable sounds in game
+     */
     changeSoundSettings() {
         if (!this.soundsOn && this.keyboard.M) {
             this.playSounds();
@@ -50,6 +53,9 @@ class World {
     }
 
 
+    /**
+     * enable sounds
+     */
     playSounds() {
         this.audio.forEach((sound) => {
             let i = this.audio.indexOf(sound);
@@ -59,6 +65,9 @@ class World {
         this.soundsOn = true;
     }
 
+    /**
+     * mute sounds
+     */
     muteSounds() {
         this.audio.forEach((sound) => {
             let i = this.audio.indexOf(sound);
@@ -68,7 +77,10 @@ class World {
     }
 
 
-
+    /**
+     * set world to class throwableObject
+     * start gamemusic on volume 50%
+     */
     setWorld() {
         this.throwableObject.world = this;
         this.audio[0].play();
@@ -76,6 +88,9 @@ class World {
     }
 
 
+    /**
+     * add enemies of class Minotaur to level
+     */
     addMinotaur() {
         this.level.enemies.push(
             new Minotaur(this),
@@ -87,12 +102,18 @@ class World {
         )
     }
 
+    /**
+     * add endboss of class Endboss to level
+     */
     addEndboss() {
         this.level.endboss.push(
             new Endboss(this))
     }
 
 
+    /**
+     * function to execute 4 functions in interval to run the game
+     */
     runGame() {
         setInterval(() => {
             this.checkThrowObjects();
@@ -102,6 +123,9 @@ class World {
         }, 75);
     }
 
+    /**
+     * check if to enable keys
+     */
     checkKeysAvailable() {
         if (this.level.enemies.length < 1 && this.level.endboss.length > 0 && this.character.amount_keys < 1 && this.level.keys.length < 1) {
             this.level.keys.push(new Key(this));
@@ -112,6 +136,9 @@ class World {
         }
     }
 
+    /**
+     * check if to throw dagger after SPACE or throwing button is triggered
+     */
     checkThrowObjects() {
         if (this.keyboard.SPACE && !this.character.isDead()) {
             if (this.character.amount_daggers > 0) {
@@ -124,6 +151,9 @@ class World {
     }
 
 
+    /**
+     * function to splice killed enemies off their arrays
+     */
     spliceEnemiesEndboss() {
         this.level.endboss.forEach((endboss) => {
             let i = this.level.endboss.indexOf(endboss);
@@ -140,6 +170,9 @@ class World {
     }
 
 
+    /**
+     * draw whole canvas
+     */
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.ctx.translate(this.camera_x, 0);
@@ -166,12 +199,22 @@ class World {
         });
     }
 
+    /**
+     * draw each object from an array
+     * 
+     * @param {array} objects - objects that occur multiple times in the world
+     */
     addObjectsToMap(objects) {
         objects.forEach(object => {
             this.addToMap(object);
         });
     }
 
+    /**
+     * object drawn in the world and turn it over
+     * 
+     * @param {class} mo - class to draw in the world
+     */
     addToMap(mo) {
         if (mo.otherDirection) {
             this.flipImage(mo);
@@ -183,6 +226,10 @@ class World {
         }
     }
 
+    /**
+     * function to turn arround image by 180 degrees
+     * @param {class} mo class of object 
+     */
     flipImage(mo) {
         this.ctx.save();
         this.ctx.translate(mo.width, 0);
@@ -190,7 +237,10 @@ class World {
         mo.x = mo.x * -1;
     }
 
-
+    /**
+     * function to turn image back by 180 degrees
+     * @param {class} mo class of object 
+     */
     flipImageBack(mo) {
         mo.x = mo.x * -1;
         this.ctx.restore();

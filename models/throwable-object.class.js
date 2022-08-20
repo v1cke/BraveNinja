@@ -25,6 +25,13 @@ class ThrowableObject extends MovableObject {
     ];
 
 
+    /**
+     * draw daggers in canvas
+     * @param {number} x position on x-axis 
+     * @param {number} y position on y-axis
+     * @param {Function} direction direction of moving object
+     * @param {class} world class of world
+     */
     constructor(x, y, direction, world) {
         super().loadImage('img/daggers/PNG/dagger8.png');
         this.world = world;
@@ -37,6 +44,11 @@ class ThrowableObject extends MovableObject {
         this.throwDagger();
     }
 
+    /**
+     * query if dagger colliding with object
+     * @param {class} mo - class of object wich is colliding with dagger
+     * @returns true if dagger colliding with object
+     */
     DaggerColliding(mo) {
         if (mo instanceof Minotaur) {
             return this.x + this.width > mo.x + mo.width / 2 &&
@@ -51,6 +63,11 @@ class ThrowableObject extends MovableObject {
         }
     }
 
+    /**
+     * query if dagger colliding with objects head
+     * @param {class} mo - class of object wich is colliding with dagger
+     * @returns true if dagger colliding with objects head
+     */
     DaggerCollidingHead(mo) {
         return this.x + this.width > mo.x + mo.width / 2.5 &&
             this.x + this.width < mo.x + mo.width &&
@@ -58,7 +75,10 @@ class ThrowableObject extends MovableObject {
             this.y < mo.y + mo.height
     }
 
-    checkDaggerNeeded(){
+    /**
+     * function to disable interval for throwing daggers
+     */
+    checkDaggerNeeded() {
         setInterval(() => {
             if (this.world.level.enemies.length < 1 && this.world.level.endboss.length < 1) {
                 clearInterval(this.throwingDaggers);
@@ -67,6 +87,9 @@ class ThrowableObject extends MovableObject {
     }
 
 
+    /**
+     * function for throwing dagger
+     */
     throwDagger() {
         this.applyGravity();
         // this.world.audio[9].play();
@@ -79,27 +102,35 @@ class ThrowableObject extends MovableObject {
         }, 25)
     }
 
-
+    /**
+     * function to execute animations of enemies when hit by dagger
+     * @param {Function} direction direction of moving of throwen dagger
+     */
     checkDaggerCollision(direction) {
         direction;
         this.world.level.enemies.forEach((enemy) => {
             if (this.DaggerColliding(enemy)) {
-                this.speed = 0;
-                this.loadImage('img/daggers/PNG/dagger9.png');
+                this.enemiesHit();
                 enemy.energy = 0;
             }
         })
         this.world.level.endboss.forEach((endboss) => {
             if (this.DaggerColliding(endboss)) {
-                this.speed = 0;
-                this.loadImage('img/daggers/PNG/dagger9.png');
+                this.enemiesHit();
                 endboss.hitByDaggerBody();
             } else if (this.DaggerCollidingHead(endboss)) {
-                this.speed = 0;
-                this.loadImage('img/daggers/PNG/dagger9.png');
+                this.enemiesHit();
                 endboss.hitByDaggerHead();
             }
         })
+    }
+
+    /**
+     * animates dagger with bloodsplash and stops enemy when hit by dagger
+     */
+    enemiesHit() {
+        this.speed = 0;
+        this.loadImage('img/daggers/PNG/dagger9.png');
     }
 
 }

@@ -9,6 +9,7 @@ class Daggerbar extends DrawableObject {
         'img/barelements/1_statusbar/1_statusbar_daggers/100.png',
     ];
      
+
     constructor(){
         super();
         this.loadImages(this.IMAGES_DAGGERS);
@@ -20,12 +21,20 @@ class Daggerbar extends DrawableObject {
     }
 
 
+    /**
+     * function to set statusbar of left throwable daggers
+     * @param {number} amount_daggers - amount of daggers wich character can throw on enemies
+     */
     setAmountDaggers(amount_daggers){
         this.amount_daggers = amount_daggers;
         let path = this.IMAGES_DAGGERS[this.resolveImageDaggers()];
         this.img = this.imageCache[path];
     }
 
+    /**
+     * 
+     * @returns the statusbar picture depending on left amount of daggers from character
+     */
     resolveImageDaggers(){
         if(this.amount_daggers < 1) {
             return 0;

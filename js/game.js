@@ -4,12 +4,18 @@ let keyboard = new Keyboard();
 let game = document.documentElement;
 
 
+/**
+ * initiate the game
+ */
 function init() {
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
 }
 
 
+/**
+ * check if a mobile or apple device is used AND if it is hold on portrai or landscape mode
+ */
 function checkDevice() {
     setInterval(() => {
         if (isMobile()) {
@@ -30,6 +36,10 @@ function checkDevice() {
 }
 
 
+/**
+ * 
+ * @returns if user uses a mobile (except apple devices)
+ */
 function isMobile() {
     // credit to Timothy Huang for this regex test: 
     // https://dev.to/timhuang/a-simple-way-to-detect-if-browser-is-on-a-mobile-device-with-javascript-44j3
@@ -41,6 +51,10 @@ function isMobile() {
     }
 }
 
+/**
+ * 
+ * @returns if user uses an apple device
+ */
 function isAppleDevice() {
     // credit to Timothy Huang for this regex test: 
     // https://dev.to/timhuang/a-simple-way-to-detect-if-browser-is-on-a-mobile-device-with-javascript-44j3
@@ -53,6 +67,10 @@ function isAppleDevice() {
 }
 
 
+/**
+ * 
+ * @returns if device is hold in landscape mode
+ */
 function landscape() {
     let screenW = screen.width;
     let screenH = screen.height;
@@ -64,6 +82,9 @@ function landscape() {
 }
 
 
+/**
+ * enable start button and controlling buttons and disable "turn device" text
+ */
 function deviceLandscape() {
     document.getElementById('turnDevice').style.display = "none";
     document.getElementById('startBtn').style.display = "block";
@@ -71,6 +92,9 @@ function deviceLandscape() {
     openFullscreen();
 }
 
+/**
+ * disable start button and controlling buttons and enable "turn device" text
+ */
 function devicePortrait() {
     document.getElementById('turnDevice').style.display = "block";
     document.getElementById('startBtn').style.display = "none";
@@ -79,12 +103,18 @@ function devicePortrait() {
 }
 
 
+/**
+ * disable controlling buttons after finish game
+ */
 function checkPanelcontainerNeeded() {
     if (document.getElementById('GameOverScreen').style.display == "flex" || document.getElementById('wonGameScreen').style.display == "flex")
         document.getElementById('panelcontainer').style.display = "none";
 }
 
 
+/**
+ * enable fullscreen the game
+ */
 function openFullscreen() {
     game;
     if (game.requestFullscreen) {
@@ -96,6 +126,9 @@ function openFullscreen() {
     }
 }
 
+/**
+ * disable fullscreen
+ */
 function closeFullscreen() {
     if (game.exitFullscreen) {
         game.exitFullscreen();
@@ -107,6 +140,9 @@ function closeFullscreen() {
 }
 
 
+/**
+ * hide everything except canvas (the game)
+ */
 function hideStartScreen() {
     document.getElementById('startScreen').style.display = "none";
     document.getElementById('helpScreen').style.display = "none";
@@ -115,6 +151,9 @@ function hideStartScreen() {
     init();
 }
 
+/**
+ * hide everything except startscreen
+ */
 function showStartScreen() {
     document.getElementById('startScreen').style.display = "flex";
     document.getElementById('helpScreen').style.display = "none";
@@ -122,6 +161,9 @@ function showStartScreen() {
     document.getElementById('canvas').style.display = "none";
 }
 
+/**
+ * hide everything except helpscreen
+ */
 function showHelpScreen() {
     document.getElementById('startScreen').style.display = "none";
     document.getElementById('helpScreen').style.display = "block";
@@ -129,6 +171,9 @@ function showHelpScreen() {
     document.getElementById('canvas').style.display = "none";
 }
 
+/**
+ * hide everything except button-explantation screen
+ */
 function showButtonScreen() {
     document.getElementById('startScreen').style.display = "none";
     document.getElementById('helpScreen').style.display = "none";
@@ -136,15 +181,9 @@ function showButtonScreen() {
 }
 
 
-function checkIfInitGame() {
-    if (document.getElementById('startScreen').style.display == "none" &&
-        document.getElementById('helpScreen').style.display == "none" &&
-        document.getElementById('btnScreen').style.display == "none") {
-        document.getElementById('canvas').style.display = "block";
-        init();
-    }
-}
-
+/**
+ * query whether key was pressed
+ */
 window.addEventListener("keydown", (e) => {
     if (e.keyCode == 37) {
         keyboard.LEFT = true;
@@ -166,7 +205,9 @@ window.addEventListener("keydown", (e) => {
     }
 })
 
-
+/**
+ * query whether key was released
+ */
 window.addEventListener("keyup", (e) => {
     if (e.keyCode == 37) {
         keyboard.LEFT = false;

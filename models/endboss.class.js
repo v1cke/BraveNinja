@@ -76,6 +76,7 @@ class Endboss extends MovableObject {
         'img/troll/Troll_01_1_ATTACK_009.png',
     ];
 
+   
     constructor(world) {
         super()
         this.loadImage('img/troll/Troll_01_1_WALK_000.png');
@@ -90,6 +91,12 @@ class Endboss extends MovableObject {
     }
 
 
+    /**
+     * executes idle animation when character is dead or not closer than 500px to endboss
+     * executes hurting animation when hit by dagger
+     * executes dying animation when energy drops to 0
+     * executes moving left or right (folowing character) when movement triggered by character
+     */
     animate() {
         this.animationTimer = setInterval(() => {
             if (this.world.character.isDead()) {
@@ -118,6 +125,11 @@ class Endboss extends MovableObject {
     }
 
 
+    /**
+     * function for moving endboss left or right
+     * attacking character when close enough to hit
+     * @param {Function} move - moving function and animation to left or right
+     */
     endbossMoving(move) {
         if (!this.isDead() && !this.objectHurt &&
          this.endbossMove) {
@@ -137,6 +149,10 @@ class Endboss extends MovableObject {
     }
 
 
+    /**
+     * function to check if character close enough to attack
+     * @returns attackable or not attackable
+     */
     checkIfCharacterAttackable() {
         if (this.characterLeft(this)) {
             if (this.world.character.x + this.world.character.width - 10 >= this.x) {
@@ -154,6 +170,9 @@ class Endboss extends MovableObject {
     }
 
 
+    /**
+     * executes dying animation 
+     */
     gotKilled() {
         this.animationTimer = this.loadImage('img/troll/Troll_01_1_DIE_009.png');
         setTimeout(() => {

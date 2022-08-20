@@ -12,6 +12,10 @@ class Treasure extends MovableObject {
     ]
 
 
+    /**
+     * draw treasure chest in canvas
+     * @param {class} world class of world
+     */
     constructor(world) {
         super();
         this.world = world;
@@ -22,6 +26,10 @@ class Treasure extends MovableObject {
         this.checkTreasureChest();
     }
 
+    /**
+     * query if chest gets opened or not
+     * executes animation of closed chest
+     */
     checkTreasureChest() {
         this.getTreasure = setInterval(() => {
             if (this.world.character.x > 2550 && this.world.character.x < 2900) {
@@ -35,6 +43,10 @@ class Treasure extends MovableObject {
         }, 200);
     }
 
+    /**
+     * executes animation of opened chest
+     * afterwards finishes game by closing canvas and open winner screen
+     */
     treasureFound() {
         this.loadImage('img/treasurebox/box_opened1.png')
         setTimeout(() => {

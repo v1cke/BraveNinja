@@ -7,6 +7,9 @@ class Keyboard {
     world;
 
 
+    /**
+    * query whether button on mobile device was pressed
+    */
     btnPressEvents() {
         document.getElementById('btnLeft').addEventListener('touchstart', (e) => {
             e.preventDefault();

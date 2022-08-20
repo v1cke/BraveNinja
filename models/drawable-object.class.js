@@ -10,6 +10,10 @@ class DrawableObject {
     currentImage = 0;
 
 
+    /**
+     * load respective image
+     * @param {string} path
+     */
     loadImage(path) {
         this.img = new Image();
         this.img.src = path;
@@ -27,6 +31,11 @@ class DrawableObject {
         })
     }
 
+
+    /**
+     * draw object in canvas
+     * @param {class} ctx - context of the class 
+     */
     draw(ctx) {
         ctx.drawImage(this.img, this.x, this.y, this.width, this.height);
     }
