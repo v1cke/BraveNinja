@@ -27,8 +27,8 @@ class World {
         new Audio('audio/youLose.mp3'),
         new Audio('audio/youwon.mp3'),
     ];
-
-
+    
+    
     constructor(canvas, keyboard) {
         this.ctx = canvas.getContext('2d');
         this.canvas = canvas;
@@ -40,9 +40,81 @@ class World {
         this.addMinotaur();
         this.addEndboss();
     };
+    
+    
+    /**
+     * function to execute 4 functions in interval to run the game
+     */
+    runGame() {
+        setInterval(() => {
+            this.checkThrowObjects();
+            this.checkKeysAvailable();
+            this.spliceEnemiesEndboss();
+            this.changeSoundSettings();
+        }, 75);
+    }
+    
+    
+    /**
+     * check if to throw dagger after SPACE or throwing button is triggered
+     */
+    checkThrowObjects() {
+        if (this.keyboard.SPACE && !this.character.isDead()) {
+            if (this.character.amount_daggers > 0) {
+                this.character.amount_daggers--;
+                this.daggerBar.setAmountDaggers(this.character.amount_daggers);
+                let dagger = new ThrowableObject(this.character.x + 50, this.character.y + 50, this.character.otherDirection, this);
+                this.throwableDagger.push(dagger);
+            }
+        }
+    }
 
 
-    /**aaaa
+    /**
+     * check if to enable keys
+     */
+    checkKeysAvailable() {
+        if (this.level.enemies.length < 1 && this.level.endboss.length > 0 && this.character.amount_keys < 1 && this.level.keys.length < 1) {
+            this.level.keys.push(new Key(this));
+        } else if (this.level.endboss.length < 1 && this.level.enemies.length > 0 && this.character.amount_keys < 1 && this.level.keys.length < 1) {
+            this.level.keys.push(new Key(this));
+        } else if (this.level.enemies.length < 1 && this.level.endboss.length < 1 && this.character.amount_keys < 2 && this.level.keys.length < 1) {
+            this.level.keys.push(new Key(this));
+        }
+    }
+
+
+    /**
+     * function to splice killed enemies off their arrays
+     */
+    spliceEnemiesEndboss() {
+        this.level.endboss.forEach((endboss) => {
+            let i = this.level.endboss.indexOf(endboss);
+            if (this.level.endboss[i].y > 700) {
+                this.level.endboss.splice(i, 1)
+            }
+        })
+        this.level.enemies.forEach((enemy) => {
+            let y = this.level.enemies.indexOf(enemy);
+            if (this.level.enemies[y].y > 600) {
+                this.level.enemies.splice(y, 1)
+            }
+        })
+    }
+    
+    /**
+     * set world to class throwableObject
+     * start gamemusic on volume 50%
+     */
+    setWorld() {
+        this.throwableObject.world = this;
+        this.audio[0].play();
+        this.audio[0].volume = 0.5;
+        // document.getElementById('volume').style.display = "none";
+    }
+
+
+    /**
      * function enable / disable sounds in game
      */
     changeSoundSettings() {
@@ -74,6 +146,7 @@ class World {
         document.getElementById('volume').style.display = "none";
         document.getElementById('mute').style.display = "block";
     }
+    
 
     /**
      * mute sounds
@@ -85,18 +158,6 @@ class World {
         });
         document.getElementById('mute').style.display = "none";
         document.getElementById('volume').style.display = "block";
-    }
-
-
-    /**
-     * set world to class throwableObject
-     * start gamemusic on volume 50%
-     */
-    setWorld() {
-        this.throwableObject.world = this;
-        this.audio[0].play();
-        this.audio[0].volume = 0.5;
-        // document.getElementById('volume').style.display = "none";
     }
 
 
@@ -123,63 +184,6 @@ class World {
     }
 
 
-    /**
-     * function to execute 4 functions in interval to run the game
-     */
-    runGame() {
-        setInterval(() => {
-            this.checkThrowObjects();
-            this.checkKeysAvailable();
-            this.spliceEnemiesEndboss();
-            this.changeSoundSettings();
-        }, 75);
-    }
-
-    /**
-     * check if to enable keys
-     */
-    checkKeysAvailable() {
-        if (this.level.enemies.length < 1 && this.level.endboss.length > 0 && this.character.amount_keys < 1 && this.level.keys.length < 1) {
-            this.level.keys.push(new Key(this));
-        } else if (this.level.endboss.length < 1 && this.level.enemies.length > 0 && this.character.amount_keys < 1 && this.level.keys.length < 1) {
-            this.level.keys.push(new Key(this));
-        } else if (this.level.enemies.length < 1 && this.level.endboss.length < 1 && this.character.amount_keys < 2 && this.level.keys.length < 1) {
-            this.level.keys.push(new Key(this));
-        }
-    }
-
-    /**
-     * check if to throw dagger after SPACE or throwing button is triggered
-     */
-    checkThrowObjects() {
-        if (this.keyboard.SPACE && !this.character.isDead()) {
-            if (this.character.amount_daggers > 0) {
-                this.character.amount_daggers--;
-                this.daggerBar.setAmountDaggers(this.character.amount_daggers);
-                let dagger = new ThrowableObject(this.character.x + 50, this.character.y + 50, this.character.otherDirection, this);
-                this.throwableDagger.push(dagger);
-            }
-        }
-    }
-
-
-    /**
-     * function to splice killed enemies off their arrays
-     */
-    spliceEnemiesEndboss() {
-        this.level.endboss.forEach((endboss) => {
-            let i = this.level.endboss.indexOf(endboss);
-            if (this.level.endboss[i].y > 700) {
-                this.level.endboss.splice(i, 1)
-            }
-        })
-        this.level.enemies.forEach((enemy) => {
-            let y = this.level.enemies.indexOf(enemy);
-            if (this.level.enemies[y].y > 600) {
-                this.level.enemies.splice(y, 1)
-            }
-        })
-    }
 
 
     /**

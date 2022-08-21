@@ -7,6 +7,7 @@ class ThrowableObject extends MovableObject {
     height = 30;
     direction;
     throwingDaggers;
+    needDaggers;
 
 
     IMAGES_THROWDAGGER = [
@@ -79,9 +80,10 @@ class ThrowableObject extends MovableObject {
      * function to disable interval for throwing daggers
      */
     checkDaggerNeeded() {
-        setInterval(() => {
+        this.needDaggers = setInterval(() => {
             if (this.world.level.enemies.length < 1 && this.world.level.endboss.length < 1) {
                 clearInterval(this.throwingDaggers);
+                clearInterval(this.needDaggers);
             }
         }, 500);
     }

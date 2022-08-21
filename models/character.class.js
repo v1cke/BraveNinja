@@ -4,6 +4,7 @@ class Character extends MovableObject {
     y = 0;
     world;
     speed = 9;
+    characterPlay;
     characterMovement;
 
 
@@ -79,7 +80,7 @@ class Character extends MovableObject {
      * when character is out of energy a dying animation is played and game finished afterwards
      */
     animate() {
-        setInterval(() => {
+        this.characterPlay = setInterval(() => {
             this.world.audio[4].pause();
             this.checkRunRight();
             this.checkRunLeft();
@@ -108,6 +109,7 @@ class Character extends MovableObject {
         this.world.audio[1].play();
         this.loadImage('img/ninja/Dead__009.png');
         clearInterval(this.characterMovement);
+        clearInterval(this.characterPlay);
         setTimeout(() => {
             this.world.audio[11].play();
             document.getElementById('GameOverScreen').style.display = "flex";
