@@ -42,14 +42,23 @@ class World {
     };
 
 
-    /**
+    /**aaaa
      * function enable / disable sounds in game
      */
     changeSoundSettings() {
-        if (!this.soundsOn && this.keyboard.M) {
-            this.playSounds();
-        } else if (this.soundsOn && this.keyboard.M)
-            this.muteSounds();
+        if (this.soundsOn) {
+            if (this.keyboard.M) {
+                this.soundsOn = false;
+                this.muteSounds();
+                this.keyboard.M = false;
+            }
+        } else if (!this.soundsOn) {
+            if (this.keyboard.M) {
+                this.soundsOn = true;
+                this.playSounds();
+                this.keyboard.M = false;
+            }
+        }
     }
 
 
@@ -60,9 +69,10 @@ class World {
         this.audio.forEach((sound) => {
             let i = this.audio.indexOf(sound);
             this.audio[i].volume = 1;
-        });
-        this.audio[0].volume = 0.5;
-        this.soundsOn = true;
+            this.audio[0].volume = 0.5;
+        })
+        document.getElementById('volume').style.display = "none";
+        document.getElementById('mute').style.display = "block";
     }
 
     /**
@@ -73,7 +83,8 @@ class World {
             let i = this.audio.indexOf(sound);
             this.audio[i].volume = 0;
         });
-        this.soundsOn = false;
+        document.getElementById('mute').style.display = "none";
+        document.getElementById('volume').style.display = "block";
     }
 
 
@@ -85,6 +96,7 @@ class World {
         this.throwableObject.world = this;
         this.audio[0].play();
         this.audio[0].volume = 0.5;
+        // document.getElementById('volume').style.display = "none";
     }
 
 

@@ -43,6 +43,22 @@ class Keyboard {
             e.preventDefault();
             this.SPACE = false;
         });
+        document.getElementById('mute').addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            this.M = true;
+        });
+        document.getElementById('mute').addEventListener('touchend', (e) => {
+            e.preventDefault();
+            this.M = false;
+        });
+        document.getElementById('volume').addEventListener('touchstart', (e) => {
+            e.preventDefault();
+            this.M = false;
+        });
+        document.getElementById('volume').addEventListener('touchend', (e) => {
+            e.preventDefault();
+            this.M = true;
+        });
     }
 
 }
