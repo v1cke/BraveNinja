@@ -111,7 +111,7 @@ class World {
         setTimeout(() => {
             this.audio[0].play();
             this.audio[0].volume = 0.5;
-        }, 4000);
+        }, 8000);
         // document.getElementById('volume').style.display = "none";
     }
 

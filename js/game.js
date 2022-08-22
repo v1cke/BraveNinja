@@ -28,7 +28,7 @@ function hideStartScreen() {
         if (isMobile() || isAppleDevice()) {
             document.getElementById('panelcontainer').style.display = "flex";
         }
-    }, 4000);
+    }, 8000);
 }
 
 
@@ -44,11 +44,7 @@ function checkDevice() {
                 deviceLandscape();
                 // checkPanelcontainerNeeded();
             }
-        } 
-        // else if (!isMobile()) {
-        //     closeFullscreen(canvas);
-        // }
-        if (isAppleDevice()) {
+        } if (isAppleDevice()) {
             deviceLandscape();
             // checkPanelcontainerNeeded();
         }
