@@ -211,7 +211,7 @@ class Character extends MovableObject {
      * 
      * @param {number} i - removes dagger on place [i] from array
      */
-    removeDagger(i) {
+    removeDagger(dagger, i) {
         this.world.level.daggers.splice(i, 1);
     }
 
@@ -219,7 +219,7 @@ class Character extends MovableObject {
      * 
      * @param {number} i - removes key on place [i] from array
      */
-    removeKey(i) {
+    removeKey(key, i) {
         this.world.level.keys.splice(i, 1);
     }
 

@@ -7,6 +7,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="icon" type="image/x-icon" href="img/favicon.png">
     <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="intro.css">
     <script src="models/drawable-object.class.js"></script>
     <script src="models/movable-object.class.js"></script>
     <script src="models/throwable-object.class.js"></script>
@@ -33,10 +34,10 @@
 
     <h1 id="headline"><img src="img/headline.png" alt="Henry the brave Ninja"></h1>
 
-    <div id="startScreen" >
-        <button onclick="showButtonScreen()" class="btn"><img src="img/btn_buttons.png"></button>;
-        <button onclick="showHelpScreen()" class="btn"><img src="img/btn_help.png"></button>;
-        <button id="startBtn" onclick="hideStartScreen()" class="btn"><img src="img/btn_letsplay.png"></button>;
+    <div id="startScreen">
+        <button onclick="showButtonScreen()" class="btn"><img src="img/btn_buttons.png"></button>
+        <button onclick="showHelpScreen()" class="btn"><img src="img/btn_help.png"></button>
+        <button id="startBtn" onclick="hideStartScreen()" class="btn"><img src="img/btn_letsplay.png"></button>
         <div id="turnDevice" class="turnIt">
             Please turn your Device !
         </div>
@@ -48,15 +49,18 @@
         <img src="img/btn_screen.png" class="startImg">
     </div>
 
-    <canvas id="canvas" height="480px" width="780px">
+    <div id="introContainer">
+        <div class="wrapper">
+            <div class="circle"></div>
+            <div class="circle"></div>
+            <div class="circle"></div>
+            <div class="shadow"></div>
+            <div class="shadow"></div>
+            <div class="shadow"></div>
+            <span>Loading</span>
+        </div>
+    </div>
 
-    </canvas>
-    <div id="GameOverScreen" class="finishedGame">
-        <img src="img/Game_Over.png" class="finGameScreen" onclick="window.location.reload();">
-    </div>
-    <div id="wonGameScreen" class="finishedGame">
-        <img src="img/winnerScreen.png" class="finGameScreen" onclick="window.location.reload();">
-    </div>
     <div id="panelcontainer" class="panelContainer">
         <div class="playBtnContainer">
             <button id="btnLeft"><img src="img/icon/arrow-leftW.png"></button>
@@ -68,6 +72,15 @@
             <button id="btnUp"><img src="img/icon/arrow-upW.png"></button>
             <button id="btnThrow"><img src="img/icon/arrow-throwW.png"></button>
         </div>
+    </div>
+    <canvas id="canvas" height="480px" width="780px">
+
+    </canvas>
+    <div id="GameOverScreen" class="finishedGame">
+        <img src="img/Game_Over.png" class="finGameScreen" onclick="window.location.reload();">
+    </div>
+    <div id="wonGameScreen" class="finishedGame">
+        <img src="img/winnerScreen.png" class="finGameScreen" onclick="window.location.reload();">
     </div>
 </body>
 

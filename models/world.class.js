@@ -108,8 +108,10 @@ class World {
      */
     setWorld() {
         this.throwableObject.world = this;
-        this.audio[0].play();
-        this.audio[0].volume = 0.5;
+        setTimeout(() => {
+            this.audio[0].play();
+            this.audio[0].volume = 0.5;
+        }, 4000);
         // document.getElementById('volume').style.display = "none";
     }
 
