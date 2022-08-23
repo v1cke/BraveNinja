@@ -40,10 +40,16 @@ function checkDevice() {
         if (isMobile()) {
             if (!landscape()) {
                 devicePortrait();
-            } else if (landscape()) {
+                canvasFullscreen = false;
+            } else if (landscape() && !canvasFullscreen) {
                 deviceLandscape(game);
+                canvasFullscreen = true;
                 // checkPanelcontainerNeeded();
             }
+        if (isAppleDevice() && !canvasFullscreen) {
+            deviceLandscape(game);
+            canvasFullscreen = true;
+        }
         } else if (!isMobile()) {
             !landscape();
         }
@@ -61,8 +67,13 @@ function isMobile() {
     if (/Android|webOS|BlackBerry|iPhone|iPad|iPod|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
         return true
     }
-    else {
-        return false
+}
+
+function isAppleDevice() {
+    // credit to Timothy Huang for this regex test: 
+    // https://dev.to/timhuang/a-simple-way-to-detect-if-browser-is-on-a-mobile-device-with-javascript-44j3
+    if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+        return true
     }
 }
 
@@ -108,24 +119,6 @@ function devicePortrait() {
 function checkPanelcontainerNeeded() {
     if (document.getElementById('GameOverScreen').style.display == "flex" || document.getElementById('wonGameScreen').style.display == "flex")
         document.getElementById('panelcontainer').style.display = "none";
-}
-
-
-/**
- * enable fullscreen the game
- */
-function openFullscreen(game) {
-    canvas;
-    if (!canvasFullscreen) {
-        game.requestFullscreen();
-        canvasFullscreen = true;
-    } else if (!canvasFullscreen) { /* Safari */
-        game.webkitRequestFullscreen();
-        canvasFullscreen = true;
-    } else if (!canvasFullscreen) { /* IE11 */
-        game.msRequestFullscreen();
-        canvasFullscreen = true;
-    }
 }
 
 

@@ -97,10 +97,10 @@ class MovableObject extends DrawableObject {
      * @returns true if objects colliding
      */
     isColliding(mo) {
-        return this.x + this.width > mo.x &&
-            this.y + this.height > mo.y &&
-            this.x < mo.x + mo.width &&
-            this.y < mo.y + mo.height
+            return this.x + this.width > mo.x + 30 &&
+                this.y + this.height > mo.y &&
+                this.x < mo.x + mo.width - 30 &&
+                this.y < mo.y + mo.height
     }
 
     /**
@@ -154,9 +154,9 @@ class MovableObject extends DrawableObject {
         }
     }
 
-     /**
-     * query if endboss hit by dagger in head
-     */
+    /**
+    * query if endboss hit by dagger in head
+    */
     hitByDaggerHead() {
         if (!this.objectHurt) {
             this.objectHurt = true;
@@ -176,9 +176,9 @@ class MovableObject extends DrawableObject {
     }
 
 
-     /**
-     * returns true when energy of object is 0
-     */
+    /**
+    * returns true when energy of object is 0
+    */
     isDead() {
         return this.energy == 0;
     }
