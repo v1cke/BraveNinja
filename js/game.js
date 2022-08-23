@@ -2,7 +2,7 @@ let canvas;
 let world;
 let keyboard = new Keyboard();
 canvasFullscreen = false;
-
+game = document.documentElement;
 
 /**
  * initiate the game
@@ -25,8 +25,8 @@ function hideStartScreen() {
     setTimeout(() => {
         document.getElementById('introContainer').style.display = "none";
         document.getElementById('canvas').style.display = "block";
-        if (isMobile() || isAppleDevice()) {
-            document.getElementById('panelcontainer').style.display = "flex";
+        if (isMobile()) {
+            // document.getElementById('panelcontainer').style.display = "flex";
         }
     }, 8000);
 }
@@ -41,12 +41,11 @@ function checkDevice() {
             if (!landscape()) {
                 devicePortrait();
             } else if (landscape()) {
-                deviceLandscape();
+                deviceLandscape(game);
                 // checkPanelcontainerNeeded();
             }
-        } if (isAppleDevice()) {
-            deviceLandscape();
-            // checkPanelcontainerNeeded();
+        } else if (!isMobile()) {
+            !landscape();
         }
     }, 100);
 }
@@ -59,22 +58,7 @@ function checkDevice() {
 function isMobile() {
     // credit to Timothy Huang for this regex test: 
     // https://dev.to/timhuang/a-simple-way-to-detect-if-browser-is-on-a-mobile-device-with-javascript-44j3
-    if (/Android|webOS|BlackBerry|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
-        return true
-    }
-    else {
-        return false
-    }
-}
-
-/**
- * 
- * @returns if user uses an apple device
- */
-function isAppleDevice() {
-    // credit to Timothy Huang for this regex test: 
-    // https://dev.to/timhuang/a-simple-way-to-detect-if-browser-is-on-a-mobile-device-with-javascript-44j3
-    if (/iPhone|iPad|iPod/i.test(navigator.userAgent)) {
+    if (/Android|webOS|BlackBerry|iPhone|iPad|iPod|IEMobile|Opera Mini/i.test(navigator.userAgent)) {
         return true
     }
     else {
@@ -101,11 +85,11 @@ function landscape() {
 /**
  * enable start button and controlling buttons and disable "turn device" text
  */
-function deviceLandscape() {
+function deviceLandscape(game) {
     document.getElementById('turnDevice').style.display = "none";
     document.getElementById('startBtn').style.display = "block";
     document.getElementById('panelcontainer').style.display = "flex";
-    openFullscreen();
+    game.requestFullscreen();
 }
 
 /**
@@ -115,7 +99,6 @@ function devicePortrait() {
     document.getElementById('turnDevice').style.display = "block";
     document.getElementById('startBtn').style.display = "none";
     document.getElementById('panelcontainer').style.display = "none";
-    // closeFullscreen();
 }
 
 
@@ -131,36 +114,19 @@ function checkPanelcontainerNeeded() {
 /**
  * enable fullscreen the game
  */
-function openFullscreen() {
+function openFullscreen(game) {
     canvas;
     if (!canvasFullscreen) {
-        canvas.requestFullscreen();
+        game.requestFullscreen();
         canvasFullscreen = true;
     } else if (!canvasFullscreen) { /* Safari */
-        canvas.webkitRequestFullscreen();
+        game.webkitRequestFullscreen();
         canvasFullscreen = true;
     } else if (!canvasFullscreen) { /* IE11 */
-        canvas.msRequestFullscreen();
+        game.msRequestFullscreen();
         canvasFullscreen = true;
     }
 }
-
-/**
- * disable fullscreen
- */
-// function closeFullscreen() {
-//     if (canvasFullscreen) {
-//         canvas.exitFullscreen();
-//         canvasFullscreen = false;
-//     } else if (canvasFullscreen) { /* Safari */
-//         canvas.webkitexitFullscreen();
-//         canvasFullscreen = false;
-//     } else if (canvasFullscreen) { /* IE11 */
-//         canvas.msexitFullscreen();
-//         canvasFullscreen = false;
-//     }
-// }
-
 
 
 /**

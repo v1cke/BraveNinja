@@ -42,11 +42,22 @@ canvas {
 .panelContainer {
     position: absolute;
     bottom: 2px;
+    left: 11vw;
     display: none;
     justify-content: space-between;
-    width: 80%;
+    width: 75vw;
     margin-top: 10px;
-    z-index: 15;
+}
+
+.playBtnContainer {
+    display: flex;
+    justify-content: space-evenly;
+    width: 140px;
+}
+
+.playBtnContainer button {
+    background-color: transparent;
+    border-color: transparent;
 }
 
 #introContainer{
@@ -54,24 +65,16 @@ canvas {
     height: 480px;
     width: 780px;
     border-radius: 40px;
-    background-image: url('img/intro_screen.png');
-    background-size: cover;
     z-index: 5;
 }
 
-.playBtnContainer {
-    display: flex;
-    justify-content: space-evenly;
-    width: 150px;
+.introImg{
+    height: 100%;
+    width: 100%;
 }
 
 #volume{
     display: none;
-}
-
-.playBtnContainer button {
-    background-color: transparent;
-    border-color: transparent;
 }
 
 .playBtnContainer img {
@@ -160,7 +163,7 @@ canvas {
         /* height: unset; */
     }
 
-    #startScreen, #helpScreen, #btnScreen, .finishedGame {
+    #startScreen, #helpScreen, #btnScreen, .finishedGame, #introContainer, .startImg {
         width: 100vw;
         border-radius: 0;
     }
@@ -187,7 +190,7 @@ canvas {
         height: 100vh;
     }
 
-    #startScreen, #helpScreen, #btnScreen, .finishedGame {
+    #startScreen, #helpScreen, #btnScreen, .finishedGame, #introContainer, .startImg {
         height: 100vh;
     }
 

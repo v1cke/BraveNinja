@@ -50,32 +50,33 @@
     </div>
 
     <div id="introContainer">
-        <div class="wrapper">
-            <div class="circle"></div>
-            <div class="circle"></div>
-            <div class="circle"></div>
-            <div class="shadow"></div>
-            <div class="shadow"></div>
-            <div class="shadow"></div>
-            <span>Loading</span>
+        <div><img src="img/intro_screen.png" class="startImg">
+            <div class="wrapper">
+                <div class="circle"></div>
+                <div class="circle"></div>
+                <div class="circle"></div>
+                <div class="shadow"></div>
+                <div class="shadow"></div>
+                <div class="shadow"></div>
+                <span>Loading</span>
+            </div>
         </div>
     </div>
-
-    <div id="panelcontainer" class="panelContainer">
-        <div class="playBtnContainer">
-            <button id="btnLeft"><img src="img/icon/arrow-leftW.png"></button>
-            <button id="btnRight"><img src="img/icon/arrow-rightW.png"></button>
-        </div>
-        <div class="playBtnContainer">
-            <button id="mute"><img src="img/icon/mute.png"></button>
-            <button id="volume"><img src="img/icon/volume.png"></button>
-            <button id="btnUp"><img src="img/icon/arrow-upW.png"></button>
-            <button id="btnThrow"><img src="img/icon/arrow-throwW.png"></button>
+    <div id="canvasContainer">
+        <canvas id="canvas" height="480px" width="780px"></canvas>
+        <div id="panelcontainer" class="panelContainer">
+            <div class="playBtnContainer">
+                <button id="btnLeft"><img src="img/icon/arrow-leftW.png"></button>
+                <button id="btnRight"><img src="img/icon/arrow-rightW.png"></button>
+            </div>
+            <div class="playBtnContainer">
+                <button id="mute"><img src="img/icon/mute.png"></button>
+                <button id="volume"><img src="img/icon/volume.png"></button>
+                <button id="btnUp"><img src="img/icon/arrow-upW.png"></button>
+                <button id="btnThrow"><img src="img/icon/arrow-throwW.png"></button>
+            </div>
         </div>
     </div>
-    <canvas id="canvas" height="480px" width="780px">
-
-    </canvas>
     <div id="GameOverScreen" class="finishedGame">
         <img src="img/Game_Over.png" class="finGameScreen" onclick="window.location.reload();">
     </div>
