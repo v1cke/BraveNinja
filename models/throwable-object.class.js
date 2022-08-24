@@ -132,6 +132,7 @@ class ThrowableObject extends MovableObject {
      */
     enemiesHit() {
         this.speed = 0;
+        this.acceleration = 0.5;
         this.loadImage('img/daggers/PNG/dagger9.png');
     }
 

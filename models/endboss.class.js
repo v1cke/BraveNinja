@@ -1,13 +1,12 @@
 class Endboss extends MovableObject {
-    x = 2700;
+    x = 2900;
     y = 55;
     speed = 6;
     currentImage = 0;
     width = 300;
     height = 400;
     world;
-    endbossMove = false;
-    lastHit;
+    startEndboss;
     deadTimer = 8;
 
 
@@ -76,7 +75,7 @@ class Endboss extends MovableObject {
         'img/troll/Troll_01_1_ATTACK_009.png',
     ];
 
-   
+
     constructor(world) {
         super()
         this.loadImage('img/troll/Troll_01_1_WALK_000.png');
@@ -86,10 +85,19 @@ class Endboss extends MovableObject {
         this.loadImages(this.IMAGES_HURT);
         this.loadImages(this.IMAGES_DYING);
         this.loadImages(this.IMAGES_ATTACKING);
-        this.checkIfCharacterAttackable();
-        this.animate();
+        this.checkEndbossStart()
     }
 
+
+    checkEndbossStart() {
+        this.startEndboss = setInterval(() => {
+            if (this.x - this.world.character.x < 500) {
+                this.animate();
+                clearInterval(this.startEndboss);
+            }
+        }, 200);
+
+    }
 
     /**
      * executes idle animation when character is dead or not closer than 500px to endboss
@@ -101,11 +109,7 @@ class Endboss extends MovableObject {
         this.animationTimer = setInterval(() => {
             if (this.world.character.isDead()) {
                 this.playAnimation(this.IMAGES_IDLE);
-            }
-            if (!this.world.character.isDead()) {
-                if (this.x - this.world.character.x < 500) {
-                    this.endbossMove = true;
-                }
+            } else if (!this.world.character.isDead()) {
                 if (this.objectHurt) {
                     this.world.audio[6].play();
                     this.playAnimation(this.IMAGES_HURT);
@@ -131,8 +135,7 @@ class Endboss extends MovableObject {
      * @param {Function} move - moving function and animation to left or right
      */
     endbossMoving(move) {
-        if (!this.isDead() && !this.objectHurt &&
-         this.endbossMove) {
+        if (!this.isDead() && !this.objectHurt) {
             if (!this.checkIfCharacterAttackable()) {
                 this.speed = 6;
                 move;

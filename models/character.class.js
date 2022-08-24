@@ -1,7 +1,6 @@
 class Character extends MovableObject {
     width = 60;
     height = 120
-    y = 0;
     world;
     speed = 9;
     characterPlay;
@@ -80,24 +79,27 @@ class Character extends MovableObject {
      * when character is out of energy a dying animation is played and game finished afterwards
      */
     animate() {
-        this.characterPlay = setInterval(() => {
-            this.world.audio[4].pause();
-            this.checkRunRight();
-            this.checkRunLeft();
-            this.world.camera_x = - this.x + 250;
-            if (this.y > 335) {
-                this.y = 335
-            }
-        }, 20);
-
-        this.characterMovement = setInterval(() => {
-            this.checkCollisions();
-            if (!this.isDead()) {
-                this.playingCharacter();
-            } else if (this.isDead()) {
-                this.characterKilled();
-            }
-        }, 75);
+        setTimeout(() => {
+            this.y = 0;
+            this.characterPlay = setInterval(() => {
+                this.world.audio[4].pause();
+                this.checkRunRight();
+                this.checkRunLeft();
+                this.world.camera_x = - this.x + 250;
+                if (this.y > 335) {
+                    this.y = 335
+                }
+            }, 20);
+            
+            this.characterMovement = setInterval(() => {
+                this.checkCollisions();
+                if (!this.isDead()) {
+                    this.playingCharacter();
+                } else if (this.isDead()) {
+                    this.characterKilled();
+                }
+            }, 75);
+        }, 6000);
     }
 
 

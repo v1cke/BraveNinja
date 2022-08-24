@@ -149,7 +149,7 @@ class MovableObject extends DrawableObject {
             } else {
                 setTimeout(() => {
                     this.objectHurt = false;
-                }, 2000);
+                }, 500);
             }
         }
     }
@@ -170,7 +170,7 @@ class MovableObject extends DrawableObject {
             } else {
                 setTimeout(() => {
                     this.objectHurt = false;
-                }, 2000);
+                }, 1000);
             }
         }
     }

@@ -157,26 +157,19 @@ canvas {
 }
 
 /* smartphone */
-@media only screen and (max-width: 780px) {
+@media only screen and (max-width: 950px) {
     canvas {
-        width: 100% !important;
+        width: 100vw !important;
         /* height: unset; */
     }
 
-    #startScreen, #helpScreen, #btnScreen, .finishedGame, #introContainer, .startImg {
+    #startScreen, #helpScreen, #btnScreen, .finishedGame, #introContainer, .startImg, .finGameScreen {
         width: 100vw;
         border-radius: 0;
     }
 
     .panelContainer {
         display: flex;
-    }
-
-    .startImg, .finGameScreen {
-        height: 100%;
-        width: 100%;
-        border-radius: 0px;
-        object-fit: contain;
     }
 
     h1 {
@@ -190,7 +183,7 @@ canvas {
         height: 100vh;
     }
 
-    #startScreen, #helpScreen, #btnScreen, .finishedGame, #introContainer, .startImg {
+    #startScreen, #helpScreen, #btnScreen, .finishedGame, #introContainer, .startImg, .finGameScreen {
         height: 100vh;
     }
 

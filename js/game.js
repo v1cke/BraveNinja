@@ -14,7 +14,8 @@ function init() {
 
 
 /**
- * hide everything except canvas (the game)
+ * hide everything except canvas (the game) after 6 sec. of loading screen
+ * fullscreen if is mobile device
  */
 function hideStartScreen() {
     document.getElementById('startScreen').style.display = "none";
@@ -33,7 +34,7 @@ function hideStartScreen() {
 
 
 /**
- * check if a mobile or apple device is used AND if it is hold on portrai or landscape mode
+ * check if a mobile or apple device is used AND if it is hold on portrait or landscape mode
  */
 function checkDevice() {
     setInterval(() => {
@@ -44,10 +45,9 @@ function checkDevice() {
                 deviceLandscape(game);
                 checkPanelcontainerNeeded();
             }
-            if (isAppleDevice()) {
-                deviceLandscape(game);
-                checkPanelcontainerNeeded();
-            }
+        }else if (isAppleDevice()) {
+            deviceLandscape(game);
+            checkPanelcontainerNeeded();
         } else if (!isMobile()) {
             document.getElementById('panelcontainer').style.display = "none";
             canvasFullscreenAvailable = false;
@@ -119,6 +119,7 @@ function devicePortrait() {
 function checkPanelcontainerNeeded() {
     if (document.getElementById('GameOverScreen').style.display == "flex" || document.getElementById('wonGameScreen').style.display == "flex")
         document.getElementById('panelcontainer').style.display = "none";
+    document.getElementById('headline').style.display = "none";
 }
 
 
