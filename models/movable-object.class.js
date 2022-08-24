@@ -97,9 +97,9 @@ class MovableObject extends DrawableObject {
      * @returns true if objects colliding
      */
     isColliding(mo) {
-            return this.x + this.width > mo.x + 30 &&
+            return this.x + this.width > mo.x &&
                 this.y + this.height > mo.y &&
-                this.x < mo.x + mo.width - 30 &&
+                this.x < mo.x + mo.width &&
                 this.y < mo.y + mo.height
     }
 
@@ -110,8 +110,8 @@ class MovableObject extends DrawableObject {
      */
     jumpsOnTop(mo) {
         return this.y + this.height > mo.y &&
-            this.x + (this.width - 20) > mo.x &&
-            this.x < (mo.x + mo.width)
+            this.x + this.width > mo.x + 20 &&
+            this.x < mo.x + mo.width - 20
     }
 
     /**

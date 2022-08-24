@@ -115,7 +115,7 @@ class Minotaur extends MovableObject {
                     }
                 }
             }, 50);
-        }, 8000);
+        }, 7000);
     }
 
 

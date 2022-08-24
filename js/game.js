@@ -1,7 +1,7 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
-canvasFullscreen = false;
+canvasFullscreenAvailable = false;
 game = document.documentElement;
 
 /**
@@ -21,14 +21,14 @@ function hideStartScreen() {
     document.getElementById('helpScreen').style.display = "none";
     document.getElementById('btnScreen').style.display = "none";
     init();
+    if (canvasFullscreenAvailable == true) {
+        game.requestFullscreen();
+    }
     document.getElementById('introContainer').style.display = "block";
     setTimeout(() => {
         document.getElementById('introContainer').style.display = "none";
         document.getElementById('canvas').style.display = "block";
-        if (isMobile()) {
-            // document.getElementById('panelcontainer').style.display = "flex";
-        }
-    }, 8000);
+    }, 6000);
 }
 
 
@@ -40,18 +40,17 @@ function checkDevice() {
         if (isMobile()) {
             if (!landscape()) {
                 devicePortrait();
-                canvasFullscreen = false;
-            } else if (landscape() && !canvasFullscreen) {
+            } else if (landscape()) {
                 deviceLandscape(game);
-                canvasFullscreen = true;
-                // checkPanelcontainerNeeded();
+                checkPanelcontainerNeeded();
             }
-        if (isAppleDevice() && !canvasFullscreen) {
-            deviceLandscape(game);
-            canvasFullscreen = true;
-        }
+            if (isAppleDevice()) {
+                deviceLandscape(game);
+                checkPanelcontainerNeeded();
+            }
         } else if (!isMobile()) {
-            !landscape();
+            document.getElementById('panelcontainer').style.display = "none";
+            canvasFullscreenAvailable = false;
         }
     }, 100);
 }
@@ -100,7 +99,7 @@ function deviceLandscape(game) {
     document.getElementById('turnDevice').style.display = "none";
     document.getElementById('startBtn').style.display = "block";
     document.getElementById('panelcontainer').style.display = "flex";
-    game.requestFullscreen();
+    canvasFullscreenAvailable = true;
 }
 
 /**
@@ -110,6 +109,7 @@ function devicePortrait() {
     document.getElementById('turnDevice').style.display = "block";
     document.getElementById('startBtn').style.display = "none";
     document.getElementById('panelcontainer').style.display = "none";
+    canvasFullscreenAvailable = false;
 }
 
 
