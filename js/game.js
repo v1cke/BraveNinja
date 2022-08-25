@@ -1,7 +1,7 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
-canvasFullscreenAvailable = false;
+fullscreenAvailable = false;
 game = document.documentElement;
 
 /**
@@ -15,16 +15,13 @@ function init() {
 
 /**
  * hide everything except canvas (the game) after 6 sec. of loading screen
- * fullscreen if is mobile device
+ * 
  */
 function hideStartScreen() {
     document.getElementById('startScreen').style.display = "none";
     document.getElementById('helpScreen').style.display = "none";
     document.getElementById('btnScreen').style.display = "none";
     init();
-    if (canvasFullscreenAvailable == true) {
-        game.requestFullscreen();
-    }
     document.getElementById('introContainer').style.display = "block";
     setTimeout(() => {
         document.getElementById('introContainer').style.display = "none";
@@ -45,12 +42,11 @@ function checkDevice() {
                 deviceLandscape(game);
                 checkPanelcontainerNeeded();
             }
-        }else if (isAppleDevice()) {
+        } else if (isAppleDevice()) {
             deviceLandscape(game);
             checkPanelcontainerNeeded();
         } else if (!isMobile()) {
             document.getElementById('panelcontainer').style.display = "none";
-            canvasFullscreenAvailable = false;
         }
     }, 100);
 }
@@ -99,7 +95,6 @@ function deviceLandscape(game) {
     document.getElementById('turnDevice').style.display = "none";
     document.getElementById('startBtn').style.display = "block";
     document.getElementById('panelcontainer').style.display = "flex";
-    canvasFullscreenAvailable = true;
 }
 
 /**
@@ -109,7 +104,13 @@ function devicePortrait() {
     document.getElementById('turnDevice').style.display = "block";
     document.getElementById('startBtn').style.display = "none";
     document.getElementById('panelcontainer').style.display = "none";
-    canvasFullscreenAvailable = false;
+}
+
+/**
+ * enables fullscreen 
+ */
+function showFullScreen() {
+    game.requestFullscreen();
 }
 
 

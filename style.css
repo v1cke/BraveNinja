@@ -85,12 +85,14 @@ canvas {
 .turnIt {
     display: none;
     position: absolute;
-    top: 60%;
+    top: 50%;
     left: 10%;
-    color: azure;
-    font-size: 40px;
-    font-weight: 900;
     z-index: 5;
+}
+
+.turnIt img {
+    width: 250px;
+    height: 200px;
 }
 
 

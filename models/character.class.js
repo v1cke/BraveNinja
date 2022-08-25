@@ -82,15 +82,8 @@ class Character extends MovableObject {
         setTimeout(() => {
             this.y = 0;
             this.characterPlay = setInterval(() => {
-                this.world.audio[4].pause();
-                this.checkRunRight();
-                this.checkRunLeft();
-                this.world.camera_x = - this.x + 250;
-                if (this.y > 335) {
-                    this.y = 335
-                }
+                this.drawCharacter();
             }, 20);
-            
             this.characterMovement = setInterval(() => {
                 this.checkCollisions();
                 if (!this.isDead()) {
@@ -100,6 +93,20 @@ class Character extends MovableObject {
                 }
             }, 75);
         }, 6000);
+    }
+
+
+    /**
+     * draw character in canvas and check if run left or right
+     */
+    drawCharacter(){
+        this.world.audio[4].pause();
+                this.checkRunRight();
+                this.checkRunLeft();
+                this.world.camera_x = - this.x + 250;
+                if (this.y > 335) {
+                    this.y = 335
+                }
     }
 
 
@@ -135,13 +142,20 @@ class Character extends MovableObject {
         if (this.isAboveGround()) {
             this.playAnimation(this.IMAGES_JUMP);
         } else {
-            if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
-                this.playAnimation(this.IMAGES_WALKING);
-            }
-            if (this.world.keyboard.UP && !this.isAboveGround() && !this.isHurt() && !this.isDead()) {
-                this.world.audio[3].play();
-                this.jump();
-            }
+            !this.movingArround();
+        }
+    }
+
+    /**
+     * character movement events when pressing left, right, up arrows
+     */
+    movingArround(){
+        if (this.world.keyboard.RIGHT || this.world.keyboard.LEFT) {
+            this.playAnimation(this.IMAGES_WALKING);
+        }
+        if (this.world.keyboard.UP && !this.isAboveGround() && !this.isHurt() && !this.isDead()) {
+            this.world.audio[3].play();
+            this.jump();
         }
     }
 

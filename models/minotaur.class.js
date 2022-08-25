@@ -95,27 +95,34 @@ class Minotaur extends MovableObject {
      */
     animate() {
         setTimeout(() => {
-
             this.enemyLife = setInterval(() => {
                 if (this.world.character.isDead()) {
                     this.playAnimation(this.IMAGES_IDLE);
-                }
-                if (!this.world.character.isDead()) {
-                    if (this.isDead() && this.deadTimer > 0) {
-                        this.playAnimation(this.IMAGES_DYING);
-                        this.world.audio[5].play();
-                        this.deadTimer--;
-                    } else if (this.isDead() && this.deadTimer == 0) {
-                        this.world.audio[5].pause();
-                        this.gotKilled();
-                    } else if (this.characterLeft(this)) {
+                } else if (!this.world.character.isDead()) {
+                    if (this.characterLeft(this)) {
                         this.enemieMoving(this.moveLeft());
                     } else if (this.characterRight(this)) {
                         this.enemieMoving(this.moveRight());
                     }
+                    this.checkEnemyDead();
                 }
             }, 50);
         }, 7000);
+    }
+
+
+    /**
+     * check if enemy is dead and play dead animation
+     */
+    checkEnemyDead() {
+        if (this.isDead() && this.deadTimer > 0) {
+            this.playAnimation(this.IMAGES_DYING);
+            this.world.audio[5].play();
+            this.deadTimer--;
+        } else if (this.isDead() && this.deadTimer == 0) {
+            this.world.audio[5].pause();
+            this.gotKilled();
+        }
     }
 
 

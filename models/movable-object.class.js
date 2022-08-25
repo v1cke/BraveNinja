@@ -140,9 +140,7 @@ class MovableObject extends DrawableObject {
         if (!this.objectHurt) {
             this.objectHurt = true;
             this.energy -= 10;
-            if (this.energy < 0) {
-                this.energy = 0;
-            }
+            this.energyReset();
             this.world.bossHealthBar.setPercentage(this.energy);
             if (this.isDead()) {
                 this.objectHurt = false;
@@ -161,9 +159,7 @@ class MovableObject extends DrawableObject {
         if (!this.objectHurt) {
             this.objectHurt = true;
             this.energy -= 30;
-            if (this.energy < 0) {
-                this.energy = 0;
-            }
+            this.energyReset();
             this.world.bossHealthBar.setPercentage(this.energy);
             if (this.isDead()) {
                 this.objectHurt = false;
@@ -175,6 +171,15 @@ class MovableObject extends DrawableObject {
         }
     }
 
+
+    /**
+     * resetting energy to 0 if is < 0
+     */
+    energyReset(){
+        if (this.energy < 0) {
+            this.energy = 0;
+        }
+    }
 
     /**
     * returns true when energy of object is 0

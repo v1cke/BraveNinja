@@ -186,14 +186,38 @@ class World {
     }
 
 
-
-
     /**
      * draw whole canvas
      */
     draw() {
         this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
         this.ctx.translate(this.camera_x, 0);
+        this.drawObjects();        
+        this.ctx.translate(-this.camera_x, 0); //move camera back for statusbar not move with background
+        this.drawBars();
+        this.ctx.translate(this.camera_x, 0);
+        this.addToMap(this.character);
+        this.addObjectsToMap(this.throwableDagger);
+        this.ctx.translate(-this.camera_x, 0);
+        let self = this;  // draw wird immer wieder aufgerufen
+        requestAnimationFrame(function () {
+            self.draw();
+        });
+    }
+    
+    /**
+     * draw all bar-elements in canvas
+     */
+    drawBars(){
+        this.addToMap(this.statusBar);
+        this.addToMap(this.bossHealthBar);
+        this.addToMap(this.daggerBar);
+    }
+
+    /**
+     * draw all objects in canvas
+     */
+    drawObjects(){
         this.addObjectsToMap(this.level.backgroundObjects);
         this.addObjectsToMap(this.level.clouds);
         this.addObjectsToMap(this.level.enemies);
@@ -201,20 +225,6 @@ class World {
         this.addObjectsToMap(this.level.daggers);
         this.addObjectsToMap(this.level.keys);
         this.addToMap(this.treasureChest);
-        this.ctx.translate(-this.camera_x, 0); //move camera back for statusbar not move with background
-        this.addToMap(this.statusBar);
-        this.addToMap(this.bossHealthBar);
-        this.addToMap(this.daggerBar);
-        this.ctx.translate(this.camera_x, 0);
-        this.addToMap(this.character);
-        this.addObjectsToMap(this.throwableDagger);
-        this.ctx.translate(-this.camera_x, 0);
-
-        // draw wird immer wieder aufgerufen
-        let self = this;
-        requestAnimationFrame(function () {
-            self.draw();
-        });
     }
 
     /**

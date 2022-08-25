@@ -105,17 +105,31 @@ class ThrowableObject extends MovableObject {
     }
 
     /**
-     * function to execute animations of enemies when hit by dagger
-     * @param {Function} direction direction of moving of throwen dagger
+     * function to check if thrown dagger hits enemies or endboss
+     * @param {Function} direction direction of moving of thrown dagger
      */
     checkDaggerCollision(direction) {
         direction;
+        this.daggerHitEnemy();
+        this.daggerHitEndboss();
+    }
+
+    /**
+     * check if enemies hit by thrown dagger
+     */
+    daggerHitEnemy(){
         this.world.level.enemies.forEach((enemy) => {
             if (this.DaggerColliding(enemy)) {
                 this.enemiesHit();
                 enemy.energy = 0;
             }
         })
+    }
+    
+    /**
+     * check if endboss hit by thrown dagger
+     */
+    daggerHitEndboss(){
         this.world.level.endboss.forEach((endboss) => {
             if (this.DaggerColliding(endboss)) {
                 this.enemiesHit();
