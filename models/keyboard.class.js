@@ -4,6 +4,7 @@ class Keyboard {
     UP = false;
     SPACE = false;
     M = false;
+    ENTER = false;
     world;
 
 

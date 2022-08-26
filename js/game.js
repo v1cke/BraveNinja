@@ -1,8 +1,7 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
-fullscreenAvailable = false;
-game = document.documentElement;
+
 
 /**
  * initiate the game
@@ -106,13 +105,6 @@ function devicePortrait() {
     document.getElementById('panelcontainer').style.display = "none";
 }
 
-/**
- * enables fullscreen 
- */
-function showFullScreen() {
-    game.requestFullscreen();
-}
-
 
 /**
  * disable controlling buttons after finish game
@@ -176,6 +168,9 @@ window.addEventListener("keydown", (e) => {
     if (e.keyCode == 77) {
         keyboard.M = true;
     }
+    if (e.keyCode == 13) {
+        keyboard.ENTER = true;
+    }
 })
 
 /**
@@ -199,5 +194,8 @@ window.addEventListener("keyup", (e) => {
     }
     if (e.keyCode == 77) {
         keyboard.M = false;
+    }
+    if (e.keyCode == 13) {
+        keyboard.ENTER = false;
     }
 })

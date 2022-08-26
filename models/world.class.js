@@ -12,6 +12,7 @@ class World {
     daggerBar = new Daggerbar();
     throwableDagger = [];
     soundsOn = true;
+    fullScreen = false;
     audio = [
         new Audio('audio/music.mp3'),
         new Audio('audio/ninja_die.mp3'),
@@ -51,9 +52,20 @@ class World {
             this.checkKeysAvailable();
             this.spliceEnemiesEndboss();
             this.changeSoundSettings();
+            this.checkFullscreen();
         }, 75);
     }
     
+
+    /**
+     * make Canvas fullscreen when press ENTER
+     */
+    checkFullscreen(){
+        if (this.keyboard.ENTER) {
+            this.canvas.requestFullscreen();
+        }
+    }
+
     
     /**
      * check if to throw dagger after SPACE or throwing button is triggered
