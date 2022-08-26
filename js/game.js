@@ -1,7 +1,7 @@
 let canvas;
 let world;
 let keyboard = new Keyboard();
-
+game = document.documentElement;
 
 /**
  * initiate the game
@@ -9,6 +9,11 @@ let keyboard = new Keyboard();
 function init() {
     canvas = document.getElementById('canvas');
     world = new World(canvas, keyboard);
+}
+
+
+function mobileFullscreen(){
+    game.requestFullscreen();
 }
 
 
