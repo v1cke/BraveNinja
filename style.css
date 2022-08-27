@@ -18,7 +18,7 @@ body {
     /* justify-content: center; */
     /* align-items: center; */
     overflow: hidden;
-    background-image: url('img/background/game_background_2.png');
+    background-image: url('img/background/game_background_4e.png');
 }
 
 h1 {
@@ -104,7 +104,7 @@ canvas {
     justify-content: left;
     align-items: start;
     overflow: hidden;
-    background-image: url('img/start_screen.png');
+    background-image: url('img/start_screen2.png');
     background-size: cover;
     background-repeat: no-repeat;
     border-radius: 40px;

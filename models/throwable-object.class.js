@@ -94,7 +94,7 @@ class ThrowableObject extends MovableObject {
      */
     throwDagger() {
         this.applyGravity();
-        // this.world.audio[9].play();
+        // this.world.audio[4].play();
         this.throwingDaggers = setInterval(() => {
             if (!this.direction) {
                 this.checkDaggerCollision(this.moveRight())
