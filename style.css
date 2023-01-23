@@ -11,25 +11,46 @@ body {
     -moz-user-select: none;
     -webkit-user-select: none;
     -ms-user-select: none;
-    height: 100vvh;
+    font-family: 'Audiowide';
+    font-style: normal;
+    font-weight: 400;
+    height: 100vh;
     width: 100vw;
-    font-family: 'Skranji', cursive;
-    /* display: flex; */
-    /* justify-content: center; */
-    /* align-items: center; */
     overflow: hidden;
     background-image: url('img/background/game_background_4e.png');
 }
 
-h1 {
-    margin: 0;
+/* audiowide-regular - latin */
+@font-face {
+    font-family: 'Audiowide';
+    font-style: normal;
+    font-weight: 400;
+    src: url('../fonts/audiowide-v16-latin-regular.eot');
+    /* IE9 Compat Modes */
+    src: local(''),
+        url('../braveNinja/fonts/') format('embedded-opentype'),
+        /* IE6-IE8 */
+        url('../fonts/audiowide-v16-latin-regular.woff2') format('woff2'),
+        /* Super Modern Browsers */
+        url('../fonts/audiowide-v16-latin-regular.woff') format('woff'),
+        /* Modern Browsers */
+        url('../fonts/audiowide-v16-latin-regular.ttf') format('truetype'),
+        /* Safari, Android, iOS */
+        url('../fonts/audiowide-v16-latin-regular.svg#Audiowide') format('svg');
+    /* Legacy iOS */
 }
 
-#helpScreen{
+h1 {
+    font-size: 4em;
+    margin-top: 1em;
+    color: #ce8e03;
+}
+
+#helpScreen {
     display: none;
 }
 
-#btnScreen{
+#btnScreen {
     display: none;
 }
 
@@ -60,7 +81,7 @@ canvas {
     border-color: transparent;
 }
 
-#introContainer{
+#introContainer {
     display: none;
     height: 480px;
     width: 780px;
@@ -68,12 +89,12 @@ canvas {
     z-index: 5;
 }
 
-.introImg{
+.introImg {
     height: 100%;
     width: 100%;
 }
 
-#volume{
+#volume {
     display: none;
 }
 
@@ -121,7 +142,7 @@ canvas {
     height: 80px;
 }
 
-.btn img{
+.btn img {
     border-radius: 20px;
     width: 180px;
     height: 80px;
@@ -146,7 +167,7 @@ canvas {
     transform: scale(1.0);
 }
 
-.finGameScreen{
+.finGameScreen {
     width: 780px;
     height: 480px;
     border-radius: 40px;

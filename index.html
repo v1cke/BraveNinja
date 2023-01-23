@@ -32,26 +32,29 @@
 
 <body onload="checkDevice()">
 
-    <h1 id="headline"><img src="img/headline.png" alt="Henry the brave Ninja"></h1>
+    <h1 id="headline">
+        <!-- <img src="img/headline.png" alt="Henry the brave Ninja"> -->
+        <span>The brave Ninja</span>
+    </h1>
 
     <div id="startScreen">
-        <button onclick="showButtonScreen()" class="btn"><img src="img/btn_buttons.png"></button>
-        <button onclick="showHelpScreen()" class="btn"><img src="img/btn_help.png"></button>
+        <button onclick="showButtonScreen()" class="btn"><img src="img/btn_controls.png"></button>
+        <button onclick="showHelpScreen()" class="btn"><img src="img/btn_htp.png"></button>
         <!-- <button onclick="showFullScreen()" class="btn"><img src="img/btn_fullscreen.png"></button> -->
-        <button id="startBtn" onclick="hideStartScreen()" class="btn"><img src="img/btn_letsplay.png"></button>
+        <button id="startBtn" onclick="hideStartScreen()" class="btn"><img src="img/btn_letsplay2.png"></button>
         <div id="turnDevice" class="turnIt">
             <img src="img/rotdevice.png">
         </div>
     </div>
     <div id="helpScreen" onclick="showStartScreen()">
-        <img src="img/help_screen.png" class="startImg">
+        <img src="img/help_screen2.jpg" class="startImg">
     </div>
     <div id="btnScreen" onclick="showStartScreen()">
-        <img src="img/btn_screen.png" class="startImg">
+        <img src="img/btn_screen2.jpg" class="startImg">
     </div>
 
     <div id="introContainer">
-        <div><img src="img/intro_screen2.png" class="startImg">
+        <div><img src="img/start_screen3.jpg" class="startImg">
             <div class="wrapper">
                 <div class="circle"></div>
                 <div class="circle"></div>
@@ -83,7 +86,7 @@
         <img src="img/Game_Over.png" class="finGameScreen" onclick="window.location.reload();">
     </div>
     <div id="wonGameScreen" class="finishedGame">
-        <img src="img/winnerScreen.png" class="finGameScreen" onclick="window.location.reload();">
+        <img src="img/winnerScreen.jpg" class="finGameScreen" onclick="window.location.reload();">
     </div>
 </body>
 
