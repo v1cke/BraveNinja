@@ -11,7 +11,7 @@ body {
     -moz-user-select: none;
     -webkit-user-select: none;
     -ms-user-select: none;
-    font-family: 'Audiowide';
+    font-family: 'Audiowide', cursive;
     font-style: normal;
     font-weight: 400;
     height: 100vh;
@@ -44,6 +44,7 @@ h1 {
     font-size: 4em;
     margin-top: 1em;
     color: #ce8e03;
+    font-family: 'Audiowide', cursive;
 }
 
 #helpScreen {
